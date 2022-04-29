@@ -4,15 +4,22 @@
 
 import sqlite3
 
-conn = sqlite3.connect('/user.db')
+conn = sqlite3.connect('users.db')
 
 c = conn.cursor()
 
-c.execute("""CREATE TABLE users (
+# Create the table
+c.execute("""CREATE TABLE IF NOT EXISTS users (
              username text,
              password text
          )""")
 
+c.execute("SELECT * FROM users")
+if not c.fetchall():
+    print("pain")
+
+# Save changes
 conn.commit()
 
+# Close connections
 conn.close()
