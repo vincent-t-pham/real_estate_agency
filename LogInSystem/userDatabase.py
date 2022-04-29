@@ -14,10 +14,6 @@ c.execute("""CREATE TABLE IF NOT EXISTS users (
              password text
          )""")
 
-c.execute("SELECT * FROM users")
-if not c.fetchall():
-    print("pain")
-
 # Save changes
 conn.commit()
 

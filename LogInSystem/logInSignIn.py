@@ -40,3 +40,41 @@ def usernameIsUnique(username):
     conn.close()
     return False
 
+# Checks to see if the username exists in the users database
+def usernameExists(username):
+    conn = sql.connect('users.db')
+    c = conn.cursor()
+
+    c.execute("SELECT ? FROM users", (username))
+    if c.fetchall():
+        conn.close()
+        return True
+    conn.close()
+    return False
+
+# Function to log in the user
+# Returns true if the username and password is correct
+# Returns false if username doesn't exist or if password is wrong
+def logIn(user):
+    if usernameExists(user.username):
+        conn = sql.connect('users.db')
+        c = conn.cursor()
+
+        c.execute("""
+            SELECT username
+            FROM users
+            WHERE username='?' AND password='?';
+        """, (user.username, user.password))
+
+        if not c.fetchone():
+            print("Login Failed - Password incorrect")
+            conn.close()
+            return False
+        else:
+            print("Login Successful")
+            conn.close()
+            return True
+    else:
+        print("Username not found")
+        return False
+
