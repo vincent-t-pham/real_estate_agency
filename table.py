@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Agent(
         """)
 
 c.execute("""
-CREATE TABLE Property (
+CREATE TABLE IF NOT EXISTS Property (
 	Property_id		integer not null,
 	Listed_date		date not null,
 	Square_foot		integer not null,
@@ -61,7 +61,7 @@ CREATE TABLE Property (
         """)
 
 c.execute("""
-CREATE TABLE Contract (
+CREATE TABLE IF NOT EXISTS Contract (
 	Contract_id 		integer not null,
 	Price 			integer not null,
 	Type			char(100) not null,
@@ -80,7 +80,7 @@ CREATE TABLE Contract (
         """)
 
 c.execute("""
-CREATE TABLE Maintenance_Record (
+CREATE TABLE IF NOT EXISTS Maintenance_Record (
 	Username		char(100) not null,
 	Record_id		char(100) not null,
 	Date			date,
@@ -91,7 +91,7 @@ CREATE TABLE Maintenance_Record (
         """)
 
 c.execute("""
-CREATE TABLE Seller (
+CREATE TABLE IF NOT EXISTS Seller (
 	Seller_username		char(100) not null,
 	primary key (Seller_username),
 	foreign key (Seller_username) references Owner(username) 
@@ -99,7 +99,7 @@ CREATE TABLE Seller (
         """)
 
 c.execute("""
-CREATE TABLE Landlord (
+CREATE TABLE IF NOT EXISTS Landlord (
 	Landlord_username	char(100) not null,
 	primary key (Landlord_username),
 	foreign key (Landlord_username) references Owner(username)
@@ -107,7 +107,7 @@ CREATE TABLE Landlord (
         """)
 
 c.execute("""
-CREATE TABLE Owner_phone_number (
+CREATE TABLE IF NOT EXISTS Owner_phone_number (
 	Username		char(100) not null,
 	Phone_number		char(10) not null,
 	primary key (Username),
@@ -116,7 +116,7 @@ CREATE TABLE Owner_phone_number (
         """)
 
 c.execute("""
-CREATE TABLE Agent_Email (
+CREATE TABLE IF NOT EXISTS Agent_Email (
 	Agent_id		integer not null,
 	Phone_number		char(10) not null,
 	primary key (Agent_id),
@@ -125,7 +125,7 @@ CREATE TABLE Agent_Email (
         """)
 
 c.execute("""
-CREATE TABLE Agent_phone_number (
+CREATE TABLE IF NOT EXISTS Agent_phone_number (
 	Agent_id		integer not null,
 	Phone_number		char (10) not null,
 	primary key(Agent_id, Phone_number),
@@ -134,7 +134,7 @@ CREATE TABLE Agent_phone_number (
         """)
 
 c.execute("""
-CREATE TABLE Sale_Property (
+CREATE TABLE IF NOT EXISTS Sale_Property (
 	Sale_property_id     integer not null,
 	Listing_price        integer not null,
 	Primary key (sale_property_id),
@@ -143,7 +143,7 @@ CREATE TABLE Sale_Property (
         """)
 
 c.execute("""
-CREATE TABLE Rental_Property(
+CREATE TABLE IF NOT EXISTS Rental_Property(
 	Rental_property_id    integer not null,
 	Monthly_rent        integer not null,
 	Primary key (rental_property_id),
@@ -152,15 +152,15 @@ CREATE TABLE Rental_Property(
         """)
 
 c.execute("""
-CREATE TABLE Renter(
+CREATE TABLE IF NOT EXISTS Renter(
     Renter_Username    char(100) not null,
     Primary Key(Renter_username),
-    Foreign key (Renter_username) references Client(Username),
+    Foreign key (Renter_username) references Client(Username)
 );
         """)
 
 c.execute("""
-CREATE TABLE Rents(
+CREATE TABLE IF NOT EXISTS Rents(
 	Renter_username    char(100) not null,
 	Sale_property_id    integer not null,
 	Primary Key (Renter_username),
@@ -171,7 +171,7 @@ CREATE TABLE Rents(
         """)
 
 c.execute("""
-CREATE TABLE Buyer(
+CREATE TABLE IF NOT EXISTS Buyer(
     Buyer_username char(100) not null,
     Primary Key(Buyer_username),
 	Foreign key (Buyer_username) references Client(Username)
@@ -179,7 +179,7 @@ CREATE TABLE Buyer(
         """)
 
 c.execute("""
-CREATE TABLE Buys(
+CREATE TABLE IF NOT EXISTS Buys(
     Buyer_username    char(100) not null,
     Rental_property_id    integer not null,
     Primary Key (Buyer_username),
@@ -189,8 +189,8 @@ CREATE TABLE Buys(
 );
             """)
 
-c.execute(""""
-CREATE TABLE Receives_offer(
+c.execute("""
+CREATE TABLE IF NOT EXISTS Receives_offer(
     Client_Username    char(100) not null,
     Agent_id        integer not null,
     Offer_price    integer not null,
@@ -202,7 +202,7 @@ CREATE TABLE Receives_offer(
 
 
 c.execute("""
-CREATE TABLE Client_phone_no(
+CREATE TABLE IF NOT EXISTS Client_phone_no(
     Username    char(100) not null,
     Phone_number     integer not null,
     Primary Key(Username),
@@ -211,7 +211,7 @@ CREATE TABLE Client_phone_no(
         """)
 
 c.execute("""
-CREATE TABLE Agent_works_with_client(
+CREATE TABLE IF NOT EXISTS Agent_works_with_client(
     Client_username    char(100) not null,
     Agent_id        integer not null,
     Primary Key (Client_username, Agent_id),
@@ -220,12 +220,20 @@ CREATE TABLE Agent_works_with_client(
         """)
 
 c.execute("""
-CREATE TABLE Agent_works_with_owner(
+CREATE TABLE IF NOT EXISTS Agent_works_with_owner(
     Owner_username    char(100) not null,
     Agent_id        integer not null,
     Primary Key (Owner_username, Agent_id),
 	Foreign key (Agent_id) references Agent(Agent_id)
 );""")
+
+c.execute("INSERT OR REPLACE INTO Owner VALUES ('Vincent.t.pham', 'Vincent', '2001-01-02', 'vincent.t.pham@sjsu.edu')") 
+c.execute("INSERT OR REPLACE INTO Seller VALUES ('test')")
+c.execute("select * from Seller")
+print(c.fetchall())
+c.execute("select * from Owner")
+results = c.fetchall()
+print(results)
 
 conn.commit()
 
