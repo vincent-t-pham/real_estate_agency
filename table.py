@@ -229,12 +229,6 @@ CREATE TABLE IF NOT EXISTS Agent_works_with_owner(
 
 c.execute("INSERT OR REPLACE INTO Owner VALUES ('Vincent.t.pham', 'Vincent', '2001-01-02', 'vincent.t.pham@sjsu.edu')") 
 c.execute("INSERT OR REPLACE INTO Seller VALUES ('test')")
-c.execute("select * from Seller")
-print(c.fetchall())
-c.execute("select * from Owner")
-results = c.fetchall()
-print(results)
 
 conn.commit()
 
-conn.close()
