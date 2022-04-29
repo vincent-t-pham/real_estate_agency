@@ -17,6 +17,8 @@ def utilGetAllUsers():
     conn.close()
 
 # Function to add a user to the database
+# Returns True if sign in is successful
+# Returns False if sign in is unsuccessful
 def signIn(user):
     if usernameIsUnique(user.username):
         conn = sql.connect('users.db')
@@ -25,8 +27,10 @@ def signIn(user):
         c.execute("INSERT INTO users VALUES (?, ?)", (user.username, user.password))
         conn.commit()
         conn.close()
+        return True
     else:
         print("Username already taken")
+        return False
 
 # Checks to see if the username is unique before adding to the database
 def usernameIsUnique(username):
