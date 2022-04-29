@@ -4,7 +4,7 @@
 # functions to verify that username and password match
 
 import sqlite3 as sql
-from user import user
+from user import User
 
 # Debugging function to print out all users and passwords
 def utilGetAllUsers():
@@ -37,7 +37,7 @@ def usernameIsUnique(username):
     conn = sql.connect('users.db')
     c = conn.cursor()
 
-    c.execute("SELECT ? FROM users", (username))
+    c.execute("SELECT ? FROM users", (username,))
     if not c.fetchall():
         conn.close()
         return True
@@ -49,7 +49,7 @@ def usernameExists(username):
     conn = sql.connect('users.db')
     c = conn.cursor()
 
-    c.execute("SELECT ? FROM users", (username))
+    c.execute("SELECT ? FROM users", (username,))
     if c.fetchall():
         conn.close()
         return True
