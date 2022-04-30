@@ -27,3 +27,47 @@ while check:
         print("Program Terminated")
         check = 0
 print("Thank You!")
+
+#3. if seller
+check =1
+while check:
+    c = int(input("Hello, you are a seller\n1) Select an agent\n2) Exit\n"))
+    if c == 1:
+        selectqry = "select * from agent"
+        curr.execute(selectqry)
+        result = curr.fetchall()
+        for record in result:
+            print(record)
+    elif c == 2:
+        print("Program Terminated")
+        check = 0
+print("Thank You!")
+
+#4. if agent
+check =1
+while check:
+    c = int(input("Hello, you are an agent\n1) Find a client\n2) Make a listing \n"
+                  "3) Bring listing off market\n4) Exit\n"))
+    if c == 1:
+        selectqry = "select * from client"
+        curr.execute(selectqry)
+        result = curr.fetchall()
+        for record in result:
+            print(record)
+    elif c == 2:
+    elif c == 3:
+    elif c == 4:
+        print("Program Terminated")
+        check = 0
+print("Thank You!")
+
+#5. if client
+check =1
+while check:
+    c = int(input("Hello, you are looking for a place\n1) Define the range\n2) Exit\n"))
+    if c == 1:
+
+    elif c == 2:
+        print("Program Terminated")
+        check = 0
+print("Thank You!")
