@@ -77,7 +77,7 @@ def logIn(user):
         c.execute("""
             SELECT username
             FROM users
-            WHERE username='?' AND password='?';
+            WHERE username=? AND password=?;
         """, (user.username, user.password))
 
         # If query is empty, username or password is incorrect
@@ -86,7 +86,6 @@ def logIn(user):
             conn.close()
             return False
         else:
-            print("Login Successful")
             conn.close()
             return True
     
