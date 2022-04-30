@@ -2,14 +2,21 @@
 
 from user import User
 import logInSignIn as log
+import hashlib
 
 #################################################
 
 def printLineBreak():
     print("\n***********************\n")
 
+# Function to encrypt a password
+# Returns a hash for the password using SHA256 to generate hash
+def encryptPassword(password):
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
+
 #################################################
 
+log.utilGetAllUsers()
 print("Welcome to app thing")
 printLineBreak()
 success = False
@@ -21,16 +28,17 @@ while(not success):
     
     if firstChoice == 'signin':
         timeOutCounter = 0
-        while timeOutCounter < 3:
+        while timeOutCounter < 4:
             username = input("Enter username: ")
             password = input("Enter password: ")
-            user = User(username, password)
+            encryptedPassword = encryptPassword(password)
+            user = User(username, encryptedPassword)
             if log.signIn(user):
                 print("Sign In Successful")
                 success = True
                 break
             else:
-                print("Log In Unsuccessful, Try Again")
+                print("Sign In Unsuccessful, Try Again")
                 if (3 - timeOutCounter) > 1:
                     print("%d attempts remaining" % (3 - timeOutCounter))
                 elif (3 - timeOutCounter) == 1:
@@ -43,7 +51,8 @@ while(not success):
         while timeOutCounter < 4:
             username = input("Enter username: ")
             password = input("Enter password: ")
-            user = User(username, password)
+            encryptedPassword = encryptPassword(password)
+            user = User(username, encryptedPassword)
             if log.logIn(user):
                 print("Log In Successful")
                 success = True
@@ -55,6 +64,10 @@ while(not success):
                 elif (3 - timeOutCounter) == 1:
                     print("1 attempt remaining")
                 timeOutCounter += 1
+
+    elif firstChoice == 'delete':
+        log.utilDeleteAll()
+        success = True
 
     else:
         print("That is an invalid option, try again")

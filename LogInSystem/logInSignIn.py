@@ -16,6 +16,18 @@ def utilGetAllUsers():
 
     conn.close()
 
+# Debugging function to delete all data
+def utilDeleteAll():
+    conn = sql.connect('users.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM users")
+    conn.commit()
+
+    conn.close()
+    
+    print("All records deleted")
+
 # Function to add a user to the database
 # Only returns true if the username is unique
 # Returns True if sign in is successful
@@ -23,6 +35,7 @@ def utilGetAllUsers():
 def signIn(user):
     if usernameIsUnique(user.username):
         conn = sql.connect('users.db')
+        conn.set_trace_callback(print)
         c = conn.cursor()
 
         c.execute("INSERT INTO users VALUES (?, ?)", (user.username, user.password))
@@ -38,12 +51,15 @@ def signIn(user):
 # Returns False if not unique
 def usernameIsUnique(username):
     conn = sql.connect('users.db')
+    # conn.set_trace_callback(print)
     c = conn.cursor()
 
     # Select row with the username
-    c.execute("SELECT ? FROM users", (username,))
+    c.execute("SELECT * FROM users WHERE username = ?", (username,))
+    result = c.fetchall()
+    # print(result)
     # If query is empty, that means username doesn't exist so it's unique
-    if not c.fetchall():
+    if not result:
         conn.close()
         return True
     conn.close()
@@ -57,7 +73,7 @@ def usernameExists(username):
     c = conn.cursor()
 
     # Select row with the username
-    c.execute("SELECT ? FROM users", (username,))
+    c.execute("SELECT * FROM users WHERE username = ?", (username,))
     # If the query is not empty, that means username exists
     if c.fetchall():    
         conn.close()
