@@ -3,8 +3,10 @@
 # functions to verify that usernames are unique
 # functions to verify that username and password match
 
+from gc import collect
 import sqlite3 as sql
 from user import User
+import hashlib
 
 # Debugging function to print out all users and passwords
 def utilGetAllUsers():
@@ -27,6 +29,15 @@ def utilDeleteAll():
     conn.close()
     
     print("All records deleted")
+
+# Print line break for extra readability
+def printLineBreak():
+    print("\n***********************\n")
+
+# Function to encrypt a password
+# Returns a hash for the password using SHA256 to generate hash
+def encryptPassword(password):
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 # Function to add a user to the database
 # Only returns true if the username is unique
@@ -109,3 +120,66 @@ def logIn(user):
         print("Username not found")
         return False
 
+# Function that returns a user object with encrypted password
+def collectUserInfo():
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+    encryptedPassword = encryptPassword(password)
+    user = User(username, encryptedPassword)
+    return user
+
+# Returns the username which will be used to determine
+# if a user is an agent, landlord, seller, client, or admin
+def logInSignIn():
+    print("Welcome to the real estate agency application")
+    printLineBreak()
+    success = False
+    while(not success):
+        print("Choose an option")
+        print("[1] Sign up")
+        print("[2] Log in")
+        selection = input("Selection").lower().replace(" ", "")
+
+        # Sign up for a new account
+        # The only people that can sign up are:
+        #   Landlords, Sellers, and Clients
+        #   Only an Admin can add a new Agent
+        if selection == 'signup' or selection == '1':
+            timeOutCounter = 0
+            while timeOutCounter < 4:
+                user = collectUserInfo()
+                if signIn(user):
+                    print("Sign up successful")
+                    print("Welcome {username}!".format(user.username))
+                    return user.username
+                else:
+                    print("Sign up unsuccessful, try again\n")
+                    if (3 - timeOutCounter) > 1:
+                        print("%d attempts remaining" % (3 - timeOutCounter))
+                    elif (3 - timeOutCounter) == 1:
+                        print("1 attempt remaining")
+                    timeOutCounter += 1
+
+        # Log in to an existing account
+        if selection == 'login' or selection == '2':
+            timeOutCounter = 0
+            while timeOutCounter < 4:
+                user = collectUserInfo()
+                if logIn(user):
+                    print("Log in successful")
+                    print("Welcome back, {username}!".format(user.username))
+
+                    return user.username
+                else:
+                    print("Try Again\n")
+                    if (3 - timeOutCounter) > 1:
+                        print("%d attempts remaining" % (3 - timeOutCounter))
+                    elif (3 - timeOutCounter) == 1:
+                        print("1 attempt remaining")
+                    timeOutCounter += 1
+        
+        # Invalid input
+        else:
+            print("That is an invalid option, try again")
+
+        printLineBreak()
