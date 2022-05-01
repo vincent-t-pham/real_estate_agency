@@ -8,10 +8,19 @@ conn = sqlite3.connect('users.db')
 
 c = conn.cursor()
 
-# Create the table
+c.execute("")
+
+# Create the user table
 c.execute("""CREATE TABLE IF NOT EXISTS users (
-             username text,
-             password text
+             username varchar(25) not null,
+             password varchar(25) not null,
+             primary key (username)
+         )""")
+
+c.execute("""CREATE TABLE IF NOT EXISTS admins (
+             admin_username varchar(25) not null,
+             primary key (admin_username),
+             foreign key (admin_username) references users(username)
          )""")
 
 # Save changes

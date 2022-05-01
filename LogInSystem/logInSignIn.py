@@ -57,6 +57,34 @@ def signIn(user):
         print("Username already taken")
         return False
 
+# Function to log in the user
+# Returns true if the username and password is correct
+# Returns false if username doesn't exist or if password is wrong
+def logIn(user):
+    if usernameExists(user.username):
+        conn = sql.connect('users.db')
+        c = conn.cursor()
+
+        # Select the row where the username and the password matches the input
+        c.execute("""
+            SELECT username
+            FROM users
+            WHERE username=? AND password=?;
+        """, (user.username, user.password))
+
+        # If query is empty, username or password is incorrect
+        if not c.fetchone():
+            print("Login Failed - Password incorrect")
+            conn.close()
+            return False
+        else:
+            conn.close()
+            return True
+    
+    else:
+        print("Username not found")
+        return False
+
 # Checks to see if the username is unique before adding to the database
 # Returns True if unique
 # Returns False if not unique
@@ -92,38 +120,34 @@ def usernameExists(username):
     conn.close()
     return False
 
-# Function to log in the user
-# Returns true if the username and password is correct
-# Returns false if username doesn't exist or if password is wrong
-def logIn(user):
-    if usernameExists(user.username):
-        conn = sql.connect('users.db')
-        c = conn.cursor()
-
-        # Select the row where the username and the password matches the input
-        c.execute("""
-            SELECT username
-            FROM users
-            WHERE username=? AND password=?;
-        """, (user.username, user.password))
-
-        # If query is empty, username or password is incorrect
-        if not c.fetchone():
-            print("Login Failed - Password incorrect")
-            conn.close()
-            return False
-        else:
-            conn.close()
-            return True
-    
-    else:
-        print("Username not found")
-        return False
+# Checks if a username or password is valid
+# A username or password is valid if it is under 25 characters to fit the varChar(25)
+# Returns True if valid
+# Returns False if not valid
+def isValid(input):
+    if input <= 25 and input >= 5:
+        return True
+    print("Input must be under 25 characters and at least 5 characters")
+    return False
 
 # Function that returns a user object with encrypted password
+# Function includes input validation
 def collectUserInfo():
-    username = input("Enter username: ")
-    password = input("Enter password: ")
+    # Input validation
+    while True:
+        username = input("Enter username: ")
+        if isValid(username):
+            break
+        else:
+            print("Try again")
+    while True:
+        password = input("Enter password: ")
+        if isValid(password):
+            break
+        else:
+            print("Try again")
+
+    # Encrypt password and make user object
     encryptedPassword = encryptPassword(password)
     user = User(username, encryptedPassword)
     return user
@@ -183,3 +207,22 @@ def logInSignIn():
             print("That is an invalid option, try again")
 
         printLineBreak()
+
+# Checks if user is an admin based on username
+# Returns true if the username exists in the admins table
+# Returns false if the username doesn't exist
+def isAdmin(username):
+    conn = sql.connect('admins.db')
+    # conn.set_trace_callback(print)
+    c = conn.cursor()
+
+    # Select row with the username
+    c.execute("SELECT * FROM admins WHERE username = ?", (username,))
+    result = c.fetchall()
+    # print(result)
+    # If query is empty, that means username doesn't exist so it's unique
+    if not result:
+        conn.close()
+        return True
+    conn.close()
+    return False
