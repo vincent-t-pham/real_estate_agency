@@ -35,7 +35,7 @@ def utilDeleteAll():
 def signIn(user):
     if usernameIsUnique(user.username):
         conn = sql.connect('users.db')
-        conn.set_trace_callback(print)
+        # conn.set_trace_callback(print)
         c = conn.cursor()
 
         c.execute("INSERT INTO users VALUES (?, ?)", (user.username, user.password))

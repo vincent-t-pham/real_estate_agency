@@ -38,7 +38,7 @@ while(not success):
                 success = True
                 break
             else:
-                print("Sign In Unsuccessful, Try Again")
+                print("Sign In Unsuccessful, Try Again\n")
                 if (3 - timeOutCounter) > 1:
                     print("%d attempts remaining" % (3 - timeOutCounter))
                 elif (3 - timeOutCounter) == 1:
@@ -58,7 +58,7 @@ while(not success):
                 success = True
                 break
             else:
-                print("Log In Unsuccessful, Try Again")
+                print("Try Again\n")
                 if (3 - timeOutCounter) > 1:
                     print("%d attempts remaining" % (3 - timeOutCounter))
                 elif (3 - timeOutCounter) == 1:
@@ -69,9 +69,11 @@ while(not success):
         log.utilDeleteAll()
         success = True
 
+    elif firstChoice == 'showall':
+        log.utilGetAllUsers()
+        success = True
+
     else:
         print("That is an invalid option, try again")
 
     printLineBreak()
-
-log.utilGetAllUsers()
