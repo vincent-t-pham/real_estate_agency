@@ -314,3 +314,7 @@ def isLandlord(username):
         return True
     conn.close()
     return False
+
+# Prompts the user to see if they're a client, seller, or landlord
+# Done after signing up
+# Inserts the user into the respective tables
