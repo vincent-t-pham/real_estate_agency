@@ -252,8 +252,8 @@ def isAgent(username):
     c.execute("SELECT * FROM Agent WHERE Agent_id = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is an admin
+    if result:
         conn.close()
         return True
     conn.close()
@@ -271,8 +271,8 @@ def isClient(username):
     c.execute("SELECT * FROM Client WHERE Username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is a client
+    if result:
         conn.close()
         return True
     conn.close()
@@ -290,8 +290,8 @@ def isSeller(username):
     c.execute("SELECT * FROM seller WHERE Seller_username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is a seller
+    if result:
         conn.close()
         return True
     conn.close()
@@ -309,8 +309,8 @@ def isLandlord(username):
     c.execute("SELECT * FROM landlord WHERE Landlord_username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is a landlord
+    if result:
         conn.close()
         return True
     conn.close()

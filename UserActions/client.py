@@ -26,11 +26,12 @@ import sqlite3 as sql
 ###########################################################################################
 # Search for a rental property by location and print agent info
 def searchLocation_Rent():
-    city = input("Which city do you want to search? ")
+    city = input("\nWhich city do you want to search? ")
+    print()
 
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    #conn.set_trace_callback(print)
     c.execute("""
             SELECT *
             FROM property JOIN rental_property ON Property_id = Rental_property_id
@@ -41,22 +42,24 @@ def searchLocation_Rent():
 
     propertyIDs = printProperties(result)
 
-    index = input("Which property are you interested in? ")
+    index = int(input("\nWhich property are you interested in? "))
     id = propertyIDs[index - 1]
+    print()
 
-    print("Here is the agent info for that property: ")
+    print("\nHere is the agent info for that property: ")
     print(findAgent(id))
 
 # Search a property that's on sale by location and print agent info
 def searchLocation_Buy():
-    city = input("Which city do you want to search? ")
+    city = input("\nWhich city do you want to search? ")
+    print()
 
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    #conn.set_trace_callback(print)
     c.execute("""
             SELECT *
-            FROM property JOIN rental_property ON Property_id = Sale_property_id
+            FROM property JOIN sale_property ON Property_id = Sale_property_id
             WHERE city = ? and Property_type = 'sale';
             """, (city,))
     result = c.fetchall()
@@ -64,22 +67,24 @@ def searchLocation_Buy():
 
     propertyIDs = printProperties(result)
 
-    index = input("Which property are you interested in? ")
+    index = int(input("\nWhich property are you interested in? "))
     id = propertyIDs[index - 1]
+    print()
 
-    print("Here is the agent info for that property: ")
+    print("\nHere is the agent info for that property: ")
     print(findAgent(id))
 ###########################################################################################
     
 ###########################################################################################
 # Search a rental property based on bed and bath and print agent info
 def searchBedBath_Rent():
-    bed = input("Minimum number of bedrooms: ")
+    bed = input("\nMinimum number of bedrooms: ")
     bath = input("Minimum number of bathrooms: ")
+    print()
 
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    #conn.set_trace_callback(print)
     c.execute("""
             SELECT DISTINCT * 
             FROM property JOIN rental_property ON Property_id = Rental_property_id
@@ -90,23 +95,25 @@ def searchBedBath_Rent():
 
     propertyIDs = printProperties(result)
 
-    index = input("Which property are you interested in? ")
+    index = int(input("\nWhich property are you interested in? "))
     id = propertyIDs[index - 1]
+    print()
 
-    print("Here is the agent info for that property: ")
+    print("\nHere is the agent info for that property: ")
     print(findAgent(id))
 
 # Search for a property that's on sale based on bed and bath and print agent info
 def searchBedBath_Buy():
-    bed = input("Minimum number of bedrooms: ")
+    bed = input("\nMinimum number of bedrooms: ")
     bath = input("Minimum number of bathrooms: ")
+    print()
 
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    #conn.set_trace_callback(print)
     c.execute("""
             SELECT DISTINCT * 
-            FROM property JOIN rental_property ON Property_id = Sale_property_id
+            FROM property JOIN sale_property ON Property_id = Sale_property_id
             where Number_of_baths>=? and Number_of_beds>=? and property_type="sale"
             """, (bath, bed))
     result = c.fetchall()
@@ -114,21 +121,23 @@ def searchBedBath_Buy():
 
     propertyIDs = printProperties(result)
 
-    index = input("Which property are you interested in? ")
+    index = int(input("\nWhich property are you interested in? "))
     id = propertyIDs[index - 1]
+    print()
 
-    print("Here is the agent info for that property: ")
+    print("\nHere is the agent info for that property: ")
     print(findAgent(id))
 ###########################################################################################
 
 ###########################################################################################
 # Search a rental property based on bed and bath and print agent info
 def searchBudget_Rent():
-    budget = input("")
+    budget = input("\nWhat is your budget? ")
+    print()
 
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    #conn.set_trace_callback(print)
     c.execute("""
             SELECT DISTINCT * 
             FROM property JOIN rental_property ON Property_id = Rental_property_id
@@ -139,22 +148,24 @@ def searchBudget_Rent():
 
     propertyIDs = printProperties(result)
 
-    index = input("Which property are you interested in? ")
+    index = int(input("\nWhich property are you interested in? "))
     id = propertyIDs[index - 1]
+    print()
 
-    print("Here is the agent info for that property: ")
+    print("\nHere is the agent info for that property: ")
     print(findAgent(id))
 
 # Search for a property that's on sale based budget and print agent info
 def searchBudget_Buy():
-    budget = input("")
+    budget = input("\nWhat is your budget? ")
+    print()
 
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    #conn.set_trace_callback(print)
     c.execute("""
             SELECT DISTINCT * 
-            FROM property JOIN rental_property ON Property_id = Sale_property_id
+            FROM property JOIN sale_property ON Property_id = Sale_property_id
             where Listing_price <= ? AND property_type = "sale"
             """, (budget,))
     result = c.fetchall()
@@ -162,10 +173,11 @@ def searchBudget_Buy():
 
     propertyIDs = printProperties(result)
 
-    index = input("Which property are you interested in? ")
+    index = int(input("\nWhich property are you interested in? "))
     id = propertyIDs[index - 1]
+    print()
 
-    print("Here is the agent info for that property: ")
+    print("\nHere is the agent info for that property: ")
     print(findAgent(id))
 ###########################################################################################
 
@@ -183,14 +195,14 @@ def printProperties(result):
 def findAgent(propertyID):
     conn = sql.connect('agency.db')
     c = conn.cursor()
-
+    # conn.set_trace_callback(print)
     c.execute("""
             SELECT *
             FROM agent
             WHERE Agent_id in (SELECT Agent_id
             FROM property
             WHERE Property_id = ?)
-            """, (propertyID))
+            """, (propertyID,))
     result = c.fetchall()
     conn.close()
 

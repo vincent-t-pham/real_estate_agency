@@ -37,50 +37,53 @@ elif log.isAgent(username):
 
 elif log.isClient(username):
     while True:
-        print("Welcome Client {}".format(username))
+        print("\nWelcome Client {}".format(username))
         print("Select an operation:")
         print("[1] Buy")
         print("[2] Rent")
         print("[3] Quit")
         selection = input("Selection: ")
+        print()
 
         if selection == '1':
             while True:
-                print("How would you like to search for a property?")
+                print("\nHow would you like to search for a property?")
                 print("[1] By City")
                 print("[2] By Bed and Bath")
                 print("[3] By Budget")
                 print("[4] Return")
                 selection2 = input("Selection: ")
+                print()
 
                 if selection2 == '1':
                     client.searchLocation_Buy()
-                if selection2 == '2':
+                elif selection2 == '2':
                     client.searchBedBath_Buy()
-                if selection2 == '3':
+                elif selection2 == '3':
                     client.searchBudget_Buy()
-                if selection2 == '4':
+                elif selection2 == '4':
                     print("Returning")
                     break
                 else:
-                    print("Invalid option, try again")
+                    print("Invalid option, try again asdfasdf")
 
         if selection == '2':
             while True:
-                print("How would you like to search for a property?")
+                print("\nHow would you like to search for a property?")
                 print("[1] By City")
                 print("[2] By Bed and Bath")
                 print("[3] By Budget")
                 print("[4] Return")
                 selection2 = input("Selection: ")
+                print()
 
                 if selection2 == '1':
                     client.searchLocation_Rent()
-                if selection2 == '2':
+                elif selection2 == '2':
                     client.searchBedBath_Rent()
-                if selection2 == '3':
+                elif selection2 == '3':
                     client.searchBudget_Rent()
-                if selection2 == '4':
+                elif selection2 == '4':
                     print("Returning")
                     break
                 else:
