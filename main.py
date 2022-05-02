@@ -16,15 +16,15 @@ if log.isAdmin(username):
         print("[5] Quit")
         selection = input("Selection: ")
 
-        if selection == 1:
+        if selection == '1':
             admin.addNewAgent()
-        elif selection == 2:
+        elif selection == '2':
             admin.deleteAgent()
-        elif selection == 3:
+        elif selection == '3':
             admin.deleteOwner()
-        elif selection == 4:
+        elif selection == '4':
             admin.deleteClient()
-        elif selection == 5:
+        elif selection == '5':
             print("Quiting program")
             break
         else:
@@ -42,3 +42,5 @@ elif log.isSeller(username):
 elif log.isLandlord(username):
     # Landlord options
     pass
+else:
+    print("not done pls help")
