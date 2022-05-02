@@ -1,8 +1,13 @@
 from LogInSystem import logInSignIn as log
 from UserActions import admin
 from UserActions import landlord
+from UserActions import agent
 
+agent.addListing()
 landlord.selectAgent()
+landlord.maintenance()
+landlord.maintenance()
+
 # Get username
 username = log.logInSignUp()
 
