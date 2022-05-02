@@ -316,16 +316,47 @@ def isLandlord(username):
     return False
 
 # Prompts the user to see if they're a client, seller, or landlord
-# Done after signing up
+# Done only after signing up
 # Inserts the user into the respective tables
-def promptUserType():
-    return
+def promptUserType(username):
+    while True:
+        print("Thank you for creating an account! What are you trying to do?")
+        print("[1] I'm looking to buy or rent")
+        print("[2] I'm looking to sell my poperty")
+        print("[3] I'm a landlord")
+        selection = input("Selection: ")
+        
+        if selection == '1':
+            getClientInfo(username)
+            break
+        elif selection == '2':
+            getSellerInfo(username)
+            break
+        elif selection == '3':
+            getLandlordInfo(username)
+            break
+        else:
+            print("That is not a valid option, try again")
 
-def getClientInfo():
-    return
+# Prompts the user for all the info needed for the client tables
+def getClientInfo(username):
+    name = input("Name: ")
+    birthday = input("Birthday (YYYY-MM-DD): ")
+    email = input("Email: ")
+    phone = input("Phone number ### ### ###: ").replace(" ", "")
+    
+    conn = sql.connect('agency.db')
+    c = conn.cursor()
+    
+    c.execute("INSERT INTO client VALUES (?, ?, ?, ?, ?)", (username, name, birthday, email, phone))
+    conn.commit()
+    conn.close()
+    printLineBreak()
 
+# Prompts the user for all the info needed for the owner and seller tables
 def getSellerInfo():
     return
 
+# Prompts the user for all the info needed for the owner and landlord tables
 def getLandlordInfo():
     return
