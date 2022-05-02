@@ -196,7 +196,7 @@ c.execute("Insert into `Client` values('tony_s', 'Tony S', '1988-12-08', 'tonyst
 c.execute("Insert into Property values('2266578381', '2021-08-06', 1300, 4500, 3,4, '123 Peachtree', 'San Jose', 'CA', 95192, 'rental', '0986289', '2021-09-08', 'jimmy23', TRUE)")
 c.execute("Insert into Property values('2283729010', '2021-09-05', 1100, 3400, 2,2, '123 Avalon', 'Santa Clara', 'CA', 95145, 'sale', '0989589', '2021-09-10', 'walter07', TRUE)")
 c.execute("Insert into Property values('2289972029', '2021-09-16', 1800, 5000, 4,4, '1100 Morrison', 'San Jose', 'CA', 95126, 'sale', '0975482', '2021-09-18', 'aaron98', TRUE)")
-c.execute("Insert into Property values('2218271949', '2021-09-21', 800, 3000, 2,1, '383 Stockton', 'Santa Clara', 'CA', 95148, 'rent', '0985820', '2021-09-24', 'hina87', TRUE)")
+c.execute("Insert into Property values('2218271949', '2021-09-21', 800, 3000, 2,1, '383 Stockton', 'Santa Clara', 'CA', 95148, 'rental', '0985820', '2021-09-24', 'hina87', TRUE)")
 # add to agent
 c.execute("Insert into Agent values('0986289', 'Jesse Pinkman', 'jesse_pinkman@gmail.com', '56452613', 4, 4)")
 c.execute("Insert into Agent values('0989589', 'Anakin Skywalker', 'anakinsky@gmail.com', '56371613', 2, 2)")

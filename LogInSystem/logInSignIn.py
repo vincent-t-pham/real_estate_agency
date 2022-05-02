@@ -343,7 +343,7 @@ def getClientInfo(username):
     name = input("Name: ")
     birthday = input("Birthday (YYYY-MM-DD): ")
     email = input("Email: ")
-    phone = input("Phone number ### ### ###: ").replace(" ", "")
+    phone = input("Phone number ### ### ####: ").replace(" ", "")
     
     conn = sql.connect('agency.db')
     c = conn.cursor()

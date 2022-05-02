@@ -32,9 +32,9 @@ def searchLocation_Rent():
     c = conn.cursor()
 
     c.execute("""
-            SELECT DISTINCT* 
-            FROM property NATURAL JOIN contract  
-            WHERE city = ? AND property_type = 'rental'
+            SELECT *
+            FROM property JOIN rental_property ON Property_id = Rental_property_id
+            WHERE city = ? and Property_type = 'rental';
             """, (city,))
     result = c.fetchall()
     conn.close()
@@ -55,9 +55,9 @@ def searchLocation_Buy():
     c = conn.cursor()
 
     c.execute("""
-            SELECT DISTINCT* 
-            FROM property NATURAL JOIN contract  
-            WHERE city = ? AND property_type = 'sale'
+            SELECT *
+            FROM property NATURAL JOIN Sale_property
+            WHERE city = ? and Property_type = 'sale';
             """, (city,))
     result = c.fetchall()
     conn.close()
@@ -82,7 +82,7 @@ def searchBedBath_Rent():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN contract
+            FROM property NATURAL JOIN rental_property
             where Number_of_baths>=? and Number_of_beds>=? and property_type="rental"
             """, (bath, bed))
     result = c.fetchall()
@@ -106,7 +106,7 @@ def searchBedBath_Buy():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN contract
+            FROM property NATURAL JOIN Sale_property
             where Number_of_baths>=? and Number_of_beds>=? and property_type="sale"
             """, (bath, bed))
     result = c.fetchall()
@@ -131,8 +131,8 @@ def searchBudget_Rent():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN contract
-            where price_rent <= ? AND property_type = "rental"
+            FROM property NATURAL JOIN rental_property
+            where Monthly_rent <= ? AND property_type = "rental"
             """, (budget,))
     result = c.fetchall()
     conn.close()
@@ -154,8 +154,8 @@ def searchBudget_Buy():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN contract
-            where price_rent <= ? AND property_type = "sale"
+            FROM property NATURAL JOIN Sale_property
+            where Listing_price <= ? AND property_type = "sale"
             """, (budget,))
     result = c.fetchall()
     conn.close()
