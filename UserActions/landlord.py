@@ -20,7 +20,7 @@ def maintenance():
     c = conn.cursor()
     select = int(input("""
     1. Add maintenance record
-    2. Show all records""")
+    2. Show all records"""))
     if (select==1):
         username = input("Enter your username: ")
         recordID = input("Enter your record ID: ")
@@ -31,6 +31,7 @@ def maintenance():
         conn.close()
     if (select==2):
         c.execute("SELECT * from Maintenance_Record")
+        print(c.fetchall())
         conn.close()
 
 
