@@ -236,3 +236,60 @@ def isAdmin(username):
         return True
     conn.close()
     return False
+
+# Checks if user is an agent based on username
+# Returns true if the username exists in the admins table
+# Returns false if the username doesn't exist
+def isAgent(username):
+    conn = sql.connect('agency.db')
+    # conn.set_trace_callback(print)
+    c = conn.cursor()
+
+    # Select row with the username
+    c.execute("SELECT * FROM Agent WHERE Agent_id = ?", (username,))
+    result = c.fetchall()
+    # print(result)
+    # If query is empty, that means username doesn't exist so it's unique
+    if not result:
+        conn.close()
+        return True
+    conn.close()
+    return False
+
+# Checks if user is an client based on username
+# Returns true if the username exists in the admins table
+# Returns false if the username doesn't exist
+def isClient(username):
+    conn = sql.connect('agency.db')
+    # conn.set_trace_callback(print)
+    c = conn.cursor()
+
+    # Select row with the username
+    c.execute("SELECT * FROM Client WHERE Username = ?", (username,))
+    result = c.fetchall()
+    # print(result)
+    # If query is empty, that means username doesn't exist so it's unique
+    if not result:
+        conn.close()
+        return True
+    conn.close()
+    return False
+
+# Checks if user is an owner based on username
+# Returns true if the username exists in the admins table
+# Returns false if the username doesn't exist
+def isOwner(username):
+    conn = sql.connect('agency.db')
+    # conn.set_trace_callback(print)
+    c = conn.cursor()
+
+    # Select row with the username
+    c.execute("SELECT * FROM Owner WHERE Username = ?", (username,))
+    result = c.fetchall()
+    # print(result)
+    # If query is empty, that means username doesn't exist so it's unique
+    if not result:
+        conn.close()
+        return True
+    conn.close()
+    return False
