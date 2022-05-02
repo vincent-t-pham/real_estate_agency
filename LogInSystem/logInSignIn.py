@@ -318,3 +318,14 @@ def isLandlord(username):
 # Prompts the user to see if they're a client, seller, or landlord
 # Done after signing up
 # Inserts the user into the respective tables
+def promptUserType():
+    return
+
+def getClientInfo():
+    return
+
+def getSellerInfo():
+    return
+
+def getLandlordInfo():
+    return
