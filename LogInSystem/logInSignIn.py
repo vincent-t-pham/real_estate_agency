@@ -3,17 +3,26 @@
 # functions to verify that usernames are unique
 # functions to verify that username and password match
 
-from gc import collect
 import sqlite3 as sql
-from user import User
+from .user.user import User
 import hashlib
 
-# Debugging function to print out all users and passwords
+# Debugging function to print out all users and encrypted passwords
 def utilGetAllUsers():
     conn = sql.connect('users.db')
     c = conn.cursor()
 
     c.execute("SELECT * FROM users")
+    print(c.fetchall())
+
+    conn.close()
+
+# Debugging function to print out all admin usernames
+def utilGetAllAdmins():
+    conn = sql.connect('admins.db')
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM admins")
     print(c.fetchall())
 
     conn.close()
@@ -24,6 +33,7 @@ def utilDeleteAll():
     c = conn.cursor()
 
     c.execute("DELETE FROM users")
+    c.execute("DELETE FROM admins")
     conn.commit()
 
     conn.close()
@@ -125,7 +135,7 @@ def usernameExists(username):
 # Returns True if valid
 # Returns False if not valid
 def isValid(input):
-    if input <= 25 and input >= 5:
+    if len(input) <= 25 and len(input) >= 5:
         return True
     print("Input must be under 25 characters and at least 5 characters")
     return False
@@ -162,7 +172,7 @@ def logInSignIn():
         print("Choose an option")
         print("[1] Sign up")
         print("[2] Log in")
-        selection = input("Selection").lower().replace(" ", "")
+        selection = input("Selection: ").lower().replace(" ", "")
 
         # Sign up for a new account
         # The only people that can sign up are:
@@ -174,7 +184,7 @@ def logInSignIn():
                 user = collectUserInfo()
                 if signIn(user):
                     print("Sign up successful")
-                    print("Welcome {username}!".format(user.username))
+                    print("Welcome {}!".format(user.username))
                     return user.username
                 else:
                     print("Sign up unsuccessful, try again\n")
@@ -191,7 +201,7 @@ def logInSignIn():
                 user = collectUserInfo()
                 if logIn(user):
                     print("Log in successful")
-                    print("Welcome back, {username}!".format(user.username))
+                    print("Welcome back, {}!".format(user.username))
 
                     return user.username
                 else:
