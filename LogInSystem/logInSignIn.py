@@ -2,6 +2,7 @@
 # functions to add users to the database
 # functions to verify that usernames are unique
 # functions to verify that username and password match
+# functions to check if user is an Admin, Agent, Client, Seller, or Landlord
 
 import sqlite3 as sql
 from .user.user import User
@@ -53,7 +54,7 @@ def encryptPassword(password):
 # Only returns true if the username is unique
 # Returns True if sign in is successful
 # Returns False if sign in is unsuccessful
-def signIn(user):
+def SignUp(user):
     if usernameIsUnique(user.username):
         conn = sql.connect('users.db')
         # conn.set_trace_callback(print)
@@ -164,7 +165,7 @@ def collectUserInfo():
 
 # Returns the username which will be used to determine
 # if a user is an agent, landlord, seller, client, or admin
-def logInSignIn():
+def logInSignUp():
     print("Welcome to the real estate agency application")
     printLineBreak()
     success = False
@@ -182,7 +183,7 @@ def logInSignIn():
             timeOutCounter = 0
             while timeOutCounter < 4:
                 user = collectUserInfo()
-                if signIn(user):
+                if SignUp(user):
                     print("Sign up successful")
                     print("Welcome {}!".format(user.username))
                     return user.username
@@ -275,16 +276,35 @@ def isClient(username):
     conn.close()
     return False
 
-# Checks if user is an owner based on username
+# Checks if user is an seller based on username
 # Returns true if the username exists in the admins table
 # Returns false if the username doesn't exist
-def isOwner(username):
+def isSeller(username):
     conn = sql.connect('agency.db')
     # conn.set_trace_callback(print)
     c = conn.cursor()
 
     # Select row with the username
-    c.execute("SELECT * FROM Owner WHERE Username = ?", (username,))
+    c.execute("SELECT * FROM seller WHERE Seller_username = ?", (username,))
+    result = c.fetchall()
+    # print(result)
+    # If query is empty, that means username doesn't exist so it's unique
+    if not result:
+        conn.close()
+        return True
+    conn.close()
+    return False
+
+# Checks if user is an seller based on username
+# Returns true if the username exists in the admins table
+# Returns false if the username doesn't exist
+def isLandlord(username):
+    conn = sql.connect('agency.db')
+    # conn.set_trace_callback(print)
+    c = conn.cursor()
+
+    # Select row with the username
+    c.execute("SELECT * FROM landlord WHERE Landlord_username = ?", (username,))
     result = c.fetchall()
     # print(result)
     # If query is empty, that means username doesn't exist so it's unique

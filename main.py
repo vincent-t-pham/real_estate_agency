@@ -1,7 +1,7 @@
 from LogInSystem import logInSignIn as log
 
 # Get username
-username = log.logInSignIn()
+username = log.logInSignUp()
 
 # Check if user is an admin
 if log.isAdmin(username):
@@ -13,6 +13,9 @@ elif log.isAgent(username):
 elif log.isClient(username):
     # Client options
     pass
-elif log.isOwner(username):
-    # Owner options
+elif log.isSeller(username):
+    # Seller options
+    pass
+elif log.isLandlord(username):
+    # Landlord options
     pass
