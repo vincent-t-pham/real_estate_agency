@@ -56,7 +56,7 @@ def searchLocation_Buy():
 
     c.execute("""
             SELECT *
-            FROM property NATURAL JOIN Sale_property
+            FROM property JOIN rental_property ON Property_id = Sale_property_id
             WHERE city = ? and Property_type = 'sale';
             """, (city,))
     result = c.fetchall()
@@ -82,7 +82,7 @@ def searchBedBath_Rent():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN rental_property
+            FROM property JOIN rental_property ON Property_id = Rental_property_id
             where Number_of_baths>=? and Number_of_beds>=? and property_type="rental"
             """, (bath, bed))
     result = c.fetchall()
@@ -106,7 +106,7 @@ def searchBedBath_Buy():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN Sale_property
+            FROM property JOIN rental_property ON Property_id = Sale_property_id
             where Number_of_baths>=? and Number_of_beds>=? and property_type="sale"
             """, (bath, bed))
     result = c.fetchall()
@@ -131,7 +131,7 @@ def searchBudget_Rent():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN rental_property
+            FROM property JOIN rental_property ON Property_id = Rental_property_id
             where Monthly_rent <= ? AND property_type = "rental"
             """, (budget,))
     result = c.fetchall()
@@ -154,7 +154,7 @@ def searchBudget_Buy():
 
     c.execute("""
             SELECT DISTINCT * 
-            FROM property NATURAL JOIN Sale_property
+            FROM property JOIN rental_property ON Property_id = Sale_property_id
             where Listing_price <= ? AND property_type = "sale"
             """, (budget,))
     result = c.fetchall()

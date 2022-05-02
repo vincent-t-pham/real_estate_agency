@@ -34,6 +34,7 @@ if log.isAdmin(username):
 elif log.isAgent(username):
     # Agent options
     pass
+
 elif log.isClient(username):
     while True:
         print("Welcome Client {}".format(username))
@@ -46,9 +47,9 @@ elif log.isClient(username):
         if selection == '1':
             while True:
                 print("How would you like to search for a property?")
-                print("[1] By city")
+                print("[1] By City")
                 print("[2] By Bed and Bath")
-                print("[3] By budget")
+                print("[3] By Budget")
                 print("[4] Return")
                 selection2 = input("Selection: ")
 
@@ -67,9 +68,9 @@ elif log.isClient(username):
         if selection == '2':
             while True:
                 print("How would you like to search for a property?")
-                print("[1] By city")
+                print("[1] By City")
                 print("[2] By Bed and Bath")
-                print("[3] By budget")
+                print("[3] By Budget")
                 print("[4] Return")
                 selection2 = input("Selection: ")
 
@@ -94,8 +95,10 @@ elif log.isClient(username):
 elif log.isSeller(username):
     # Seller options
     pass
+
 elif log.isLandlord(username):
     # Landlord options
     pass
+
 else:
     print("not done pls help")

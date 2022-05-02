@@ -186,6 +186,7 @@ def logInSignUp():
                 if SignUp(user):
                     print("Sign up successful")
                     print("Welcome {}!".format(user.username))
+                    promptUserType(user.username)
                     return user.username
                 else:
                     print("Sign up unsuccessful, try again\n")
@@ -354,9 +355,33 @@ def getClientInfo(username):
     printLineBreak()
 
 # Prompts the user for all the info needed for the owner and seller tables
-def getSellerInfo():
-    return
+def getSellerInfo(username):
+    name = input("Name: ")
+    birthday = input("Birthday (YYYY-MM-DD): ")
+    email = input("Email: ")
+    phone = input("Phone number ### ### ####: ").replace(" ", "")
+
+    conn = sql.connect('agency.db')
+    c = conn.cursor()
+
+    c.execute("INSERT INTO Owner VALUES (?, ?, ?, ?, ?)", (username, name, birthday, email, phone))
+    c.execute("INSERT INTO Seller VALUES (?)", (username,))
+    conn.commit()
+    conn.close()
+    printLineBreak()
 
 # Prompts the user for all the info needed for the owner and landlord tables
-def getLandlordInfo():
-    return
+def getLandlordInfo(username):
+    name = input("Name: ")
+    birthday = input("Birthday (YYYY-MM-DD): ")
+    email = input("Email: ")
+    phone = input("Phone number ### ### ####: ").replace(" ", "")
+
+    conn = sql.connect('agency.db')
+    c = conn.cursor()
+
+    c.execute("INSERT INTO Owner VALUES (?, ?, ?, ?, ?)", (username, name, birthday, email, phone))
+    c.execute("INSERT INTO Landlord VALUES (?)", (username,))
+    conn.commit()
+    conn.close()
+    printLineBreak()
