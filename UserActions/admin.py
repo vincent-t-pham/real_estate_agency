@@ -11,8 +11,10 @@
 # Delete information from client table in agency.db
 
 import sqlite3 as sql
-from ..LogInSystem.user.user import User
-from ..LogInSystem import logInSignIn as log
+import sys
+sys.path.append('./../real_estate_agency/LogInSystem')
+from LogInSystem.user.user import User
+from LogInSystem import logInSignIn as log
 
 # Create a new Agent account for users.db and the agent table in agency.db 
 def addNewAgent():

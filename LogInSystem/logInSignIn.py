@@ -223,21 +223,21 @@ def logInSignUp():
 # Returns true if the username exists in the admins table
 # Returns false if the username doesn't exist
 def isAdmin(username):
-    conn = sql.connect('admins.db')
+    conn = sql.connect('users.db')
     # conn.set_trace_callback(print)
     c = conn.cursor()
 
     # Select row with the username
-    c.execute("SELECT * FROM admins WHERE username = ?", (username,))
+    c.execute("SELECT * FROM admins WHERE admin_username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+
+    # If query has results, that means the user is an admin
+    if result:
         conn.close()
         return True
     conn.close()
     return False
-
 # Checks if user is an agent based on username
 # Returns true if the username exists in the admins table
 # Returns false if the username doesn't exist

@@ -1,6 +1,8 @@
 from LogInSystem import logInSignIn as log
 from UserActions import admin
+from UserActions import landlord
 
+landlord.selectAgent()
 # Get username
 username = log.logInSignUp()
 
@@ -40,5 +42,7 @@ elif log.isSeller(username):
     # Seller options
     pass
 elif log.isLandlord(username):
-    # Landlord options
+    selectAgent()
     pass
+
+landlord.selectAgent()
