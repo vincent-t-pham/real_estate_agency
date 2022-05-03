@@ -16,7 +16,7 @@ import sqlite3
     # property type
     # owner username
 
-def addListing():
+def addListing(username):
     conn=sqlite3.connect('agency.db')
     c = conn.cursor()
     propertyID = input("Enter your property [ID]: ")
@@ -30,11 +30,11 @@ def addListing():
     state = input("Enter your property [state]: ")
     zipCode = input("Enter your property [zipCode]: ")
     propertyType = input("Enter your property [type]: ")
-    agentID = input("Enter your property [agent ID]: ")
-    openhouseDate = input("Enter your property [open house date]: ")
+    agentID = username
+    # openhouseDate = input("Enter your property [open house date]: ")
     ownerUsername = input("Enter your property [Owner Username]: ")
     availability = int(input("Is your property available? (1 for yes, 0 for no): "))
-    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, openhouseDate, ownerUsername, availability))
+    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, '0000-00-00', ownerUsername, availability))
     conn.commit()
     conn.close()
     

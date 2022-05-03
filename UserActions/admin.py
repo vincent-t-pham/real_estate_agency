@@ -64,6 +64,15 @@ def deleteAgent():
     c.execute("DELETE FROM agent WHERE Agent_id = ?", (userName,))
     conn.commit()
     conn.close()
+
+    # Delete from users database
+    conn = sql.connect('users.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM users WHERE Username = ?", (userName,))
+    conn.commit()
+    conn.close()
+
     print("Agent removed")
 
 # Print agent usernames and names
@@ -96,12 +105,22 @@ def deleteClient():
     index = int(input("Client #: "))
     userName = clients[index - 1]
 
+    # Delete from agency database
     conn = sql.connect('agency.db')
     c = conn.cursor()
 
     c.execute("DELETE FROM Client WHERE Username = ?", (userName,))
     conn.commit()
     conn.close()
+
+    # Delete from users database
+    conn = sql.connect('users.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM users WHERE Username = ?", (userName,))
+    conn.commit()
+    conn.close()
+
     print("Client Removed")
 
 # Print client usernames and names
@@ -138,6 +157,15 @@ def deleteOwner():
     c.execute("DELETE FROM Owner WHERE Username = ?", (userName,))
     conn.commit()
     conn.close()
+
+    # Delete from users database
+    conn = sql.connect('users.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM users WHERE Username = ?", (userName,))
+    conn.commit()
+    conn.close()
+    
     print("Owner Removed")
 
 # Print client usernames and names

@@ -47,14 +47,14 @@ elif log.isAgent(username):
         print()
 
         if selection=='1':
-            agent.addListing()
-        if selection=='2':
+            agent.addListing(username)
+        elif selection=='2':
             agent.contractListing()
-        if selection=='3':
+        elif selection=='3':
             agent.offMarket()
-        if selection=='4':
+        elif selection=='4':
             agent.openHouse()
-        if selection=='5':
+        elif selection=='5':
             print("Quitting Program")
             break
         else:
@@ -140,8 +140,6 @@ elif log.isSeller(username):
         else:
             print("Invalid option, try again")
 
-    pass
-
 elif log.isLandlord(username):
     while True:
         print("\nWelcome Landlord {}".format(username))
@@ -154,7 +152,6 @@ elif log.isLandlord(username):
             landlord.selectAgent()
         elif selection=='2':
             landlord.maintenance()
-    pass
 
 else:
     print("not done pls help")
