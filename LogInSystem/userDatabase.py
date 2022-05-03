@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2022 TEAM 11
+
 # This file is to create the user database
 # A user will have a username and a password
 # Temporary proof of concept

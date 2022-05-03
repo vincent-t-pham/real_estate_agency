@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2022 TEAM 11
+
 # This file will include:
 # functions to add users to the database
 # functions to verify that usernames are unique
