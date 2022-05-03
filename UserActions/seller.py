@@ -27,7 +27,7 @@ def inputProperty():
     city = input("Enter your property [city]: ")
     state = input("Enter your property [state]: ")
     zipCode = input("Enter your property [zipCode]: ")
-    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", location, squareFoot, lotSize, numberofBeds, numberofBaths, propertyType, ))
+    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (location, squareFoot, lotSize, numberofBeds, numberofBaths, properyType, ))
 
 def maintenance():
     conn = sqlite3.connect('agency.db')

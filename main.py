@@ -1,6 +1,9 @@
 from LogInSystem import logInSignIn as log
 from UserActions import admin
 from UserActions import client
+from UserActions import agent
+from UserActions import landlord
+from UserActions import seller
 
 # Get username
 username = log.logInSignUp()

@@ -57,8 +57,6 @@ def contractListing():
     clientUsername = input("Enter the client username: ")
     #***User inputs end***
 
-
-
     propertyID = propertyIDs[index-1]
     ownerUsername = ownerUsernames[index-1]
     c.execute("INSERT OR REPLACE INTO Contract VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (contractID, propType, price, purchaseDate, leaseStartDate, clientUsername, ownerUsername, propertyID, agentID))
@@ -84,8 +82,6 @@ def offMarket():
     #print(c.fetchall())
     conn.commit()
     conn.close()
-
-
 
 # An agent can scedule an open house
 # Select a property

@@ -6,7 +6,7 @@ c = conn.cursor()
 
 
 c.execute("""
-CREATE TABLE IF NOT EXISTS `Owner`(
+CREATE TABLE IF NOT EXISTS Owner(
 	Username		VARCHAR(25) NOT NULL,
 	Name			VARCHAR(25) NOT NULL,
 	Birthday		date,
@@ -17,16 +17,12 @@ CREATE TABLE IF NOT EXISTS `Owner`(
         """)
 
 c.execute("""
-CREATE TABLE IF NOT EXISTS `Client` (
+CREATE TABLE IF NOT EXISTS Client (
 	Username		VARCHAR(25) NOT NULL,
 	Name			VARCHAR(25) NOT NULL,
 	Birthday		date,
 	Email			VARCHAR(25) NOT NULL,
     Phone_number	VARCHAR(10) NOT NULL,
-<<<<<<< HEAD
-    Client_type		VARCHAR(25) NOT NULL,
-=======
->>>>>>> origin/Wayne_Menu
 	primary key (Username)
 	);
         
@@ -61,13 +57,9 @@ CREATE TABLE IF NOT EXISTS Property (
 	Agent_id			VARCHAR(25) NOT NULL,
 	Open_house_date		DATE,
 	Owner_username		VARCHAR(25) NOT NULL,
-<<<<<<< HEAD
     availability     	INTEGER NOT NULL,
-=======
-    availability     	INTEGER,
->>>>>>> origin/Wayne_Menu
 	PRIMARY KEY (Property_id),
-	FOREIGN KEY (Owner_username) REFERENCES `Owner`(Username) on delete cascade,
+	FOREIGN KEY (Owner_username) REFERENCES Owner(Username) on delete cascade,
 	FOREIGN KEY (Agent_id) REFERENCES Agent(Agent_id) on delete cascade
 	);
         """)
@@ -75,7 +67,7 @@ CREATE TABLE IF NOT EXISTS Property (
 c.execute("""
 CREATE TABLE IF NOT EXISTS Contract (
 	Contract_id 					CHAR(10) NOT NULL,
-	`Type`							VARCHAR(10) NOT NULL,
+	Type							VARCHAR(10) NOT NULL,
     Price_rent 						INTEGER NOT NULL,
 	Purchase_date					DATE,
 	Lease_start_date				DATE,
@@ -84,8 +76,8 @@ CREATE TABLE IF NOT EXISTS Contract (
 	Property_id						CHAR(10) NOT NULL,
 	Agent_id						VARCHAR(25) NOT NULL,
 	PRIMARY KEY (Contract_id),
-	FOREIGN KEY (Client_username) 	REFERENCES `Client`(username) on delete cascade,
-	FOREIGN KEY (Owner_username)  	REFERENCES `Owner`(username) on delete cascade,
+	FOREIGN KEY (Client_username) 	REFERENCES Client(username) on delete cascade,
+	FOREIGN KEY (Owner_username)  	REFERENCES Owner(username) on delete cascade,
 	FOREIGN KEY (Property_id)	  	REFERENCES Property(Property_id) on delete cascade,
 	FOREIGN KEY (Agent_id)		  	REFERENCES Agent(Agent_id) on delete cascade
 	);
@@ -95,7 +87,7 @@ c.execute("""
 CREATE TABLE IF NOT EXISTS Maintenance_Record (
 	Username					VARCHAR(25) NOT NULL,
 	Record_id					CHAR(10) NOT NULL,
-	`Date`						DATE,
+	Date						DATE,
 	Maintenance_item			VARCHAR(50) NOT NULL,
 	PRIMARY KEY (Username, Record_id),
 	FOREIGN KEY (Username)  	REFERENCES Landlord(Landlord_username) on delete cascade
@@ -106,7 +98,7 @@ c.execute("""
 CREATE TABLE IF NOT EXISTS Seller (
 	Seller_username					VARCHAR(25) NOT NULL,
 	PRIMARY KEY (Seller_username),
-	FOREIGN KEY (Seller_username) 	REFERENCES `Owner`(username) on delete cascade
+	FOREIGN KEY (Seller_username) 	REFERENCES Owner(username) on delete cascade
 	);
         """)
 
@@ -114,7 +106,7 @@ c.execute("""
 CREATE TABLE IF NOT EXISTS Landlord (
 	Landlord_username				VARCHAR(25) NOT NULL,
 	PRIMARY KEY (Landlord_username),
-	FOREIGN KEY (Landlord_username) REFERENCES `Owner`(username) on delete cascade
+	FOREIGN KEY (Landlord_username) REFERENCES Owner(username) on delete cascade
 	);
         """)
 
@@ -144,7 +136,7 @@ CREATE TABLE IF NOT EXISTS Rents(
 	Rental_property_id    			CHAR(10) NOT NULL,
 	PRIMARY KEY (Renter_username, Rental_property_id) ,
 	FOREIGN KEY (Rental_property_id)  REFERENCES  Rental_Property(Rental_Property_id) on delete cascade,
-	FOREIGN KEY (Renter_username)   REFERENCES `client`(username) on delete cascade
+	FOREIGN KEY (Renter_username)   REFERENCES client(username) on delete cascade
 	);
         """)
 
@@ -155,7 +147,7 @@ CREATE TABLE IF NOT EXISTS Buys(
     Sale_property_id   					CHAR(10) NOT NULL,
     PRIMARY KEY (Buyer_username, Sale_property_id),
     FOREIGN KEY (Sale_Property_id) 		REFERENCES Sale_Property(Sale_Property_id) on delete cascade,
-	FOREIGN KEY (Buyer_username) 		REFERENCES `client`(username) on delete cascade
+	FOREIGN KEY (Buyer_username) 		REFERENCES client(username) on delete cascade
 );
             """)
 
@@ -166,7 +158,7 @@ CREATE TABLE IF NOT EXISTS Receives_offer(
     Offer_price    					INTEGER NOT NULL,
     PRIMARY KEY (Client_username, Agent_id),
     FOREIGN KEY (Agent_id) 			REFERENCES Agent(Agent_id) on delete cascade,
-    FOREIGN KEY (Client_Username) 	REFERENCES `Client`(Username) on delete cascade
+    FOREIGN KEY (Client_Username) 	REFERENCES Client(Username) on delete cascade
 );
             """)
 
@@ -177,7 +169,7 @@ CREATE TABLE IF NOT EXISTS Agent_works_with_client(
     Agent_id           				VARCHAR(25) NOT NULL,
     PRIMARY KEY (Client_username, Agent_id),
 	FOREIGN KEY (Agent_id) 			REFERENCES Agent(Agent_id) on delete cascade,
-	FOREIGN KEY (Client_username)   REFERENCES `Client`(username) on delete cascade
+	FOREIGN KEY (Client_username)   REFERENCES Client(username) on delete cascade
 );
         """)
 
@@ -187,19 +179,19 @@ CREATE TABLE IF NOT EXISTS Agent_works_with_owner(
     Agent_id        			 VARCHAR(25) NOT NULL,
     PRIMARY KEY (Owner_username, Agent_id),
 	FOREIGN KEY (Agent_id) 		 REFERENCES Agent(Agent_id) on delete cascade,
-    FOREIGN KEY (Owner_username) REFERENCES `Owner`(username) on delete cascade
+    FOREIGN KEY (Owner_username) REFERENCES Owner(username) on delete cascade
 );""")
 
 # add to Owner
-c.execute("Insert into `Owner` values('jimmy23', 'Jimmy W', '1980-04-03', 'jimmyw@gmail.com', '5690230')")
-c.execute("Insert into `Owner` values('walter07', 'Walter S', '1990-06-03', 'walter_s@gmail.com', '5698210')")
-c.execute("Insert into `Owner` values('aaron98', 'Aaron P', '1976-04-23', 'aaron98@gmail.com', '5690780')")
-c.execute("Insert into `Owner` values('hina87', 'Hina S', '1998-06-14', 'hinas_87@gmail.com', '5654870')")
+c.execute("Insert into Owner values('jimmy23', 'Jimmy W', '1980-04-03', 'jimmyw@gmail.com', '5690230')")
+c.execute("Insert into Owner values('walter07', 'Walter S', '1990-06-03', 'walter_s@gmail.com', '5698210')")
+c.execute("Insert into Owner values('aaron98', 'Aaron P', '1976-04-23', 'aaron98@gmail.com', '5690780')")
+c.execute("Insert into Owner values('hina87', 'Hina S', '1998-06-14', 'hinas_87@gmail.com', '5654870')")
 # add to client
-c.execute("Insert into `Client` values('anikha69', 'Anikha S', '1997-06-03', 'anikha_s@gmail.com', '5690230')")
-c.execute("Insert into `Client` values('christineio', 'Christine Polly', '1987-06-19', 'jimmyw@gmail.com', '5687640')")
-c.execute("Insert into `Client` values('stephenstrange', 'Stephen S', '1976-04-09', 'stephen_s@gmail.com', '56919087')")
-c.execute("Insert into `Client` values('tony_s', 'Tony S', '1988-12-08', 'tonystark@gmail.com', '56182938')")
+c.execute("Insert into Client values('anikha69', 'Anikha S', '1997-06-03', 'anikha_s@gmail.com', '5690230')")
+c.execute("Insert into Client values('christineio', 'Christine Polly', '1987-06-19', 'jimmyw@gmail.com', '5687640')")
+c.execute("Insert into Client values('stephenstrange', 'Stephen S', '1976-04-09', 'stephen_s@gmail.com', '56919087')")
+c.execute("Insert into Client values('tony_s', 'Tony S', '1988-12-08', 'tonystark@gmail.com', '56182938')")
 # add to Property
 c.execute("Insert into Property values('2266578381', '2021-08-06', 1300, 4500, 3,4, '123 Peachtree', 'San Jose', 'CA', 95192, 'rental', '0986289', '2021-09-08', 'jimmy23', TRUE)")
 c.execute("Insert into Property values('2283729010', '2021-09-05', 1100, 3400, 2,2, '123 Avalon', 'Santa Clara', 'CA', 95145, 'sale', '0989589', '2021-09-10', 'walter07', TRUE)")
