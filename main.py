@@ -40,21 +40,27 @@ elif log.isAgent(username):
         print("Select an operation:")
         print("[1] Add a listing property")
         print("[2] Create a contract")
-        print("[3] Take a property off the market")
-        print("[4] Create an open house")
-        print("[5] Exit")
+        #print("[3] Take a property off the market")
+        print("[3] Create an open house")
+        print("[4] View my properties")
+        print("[5] View my contracts")
+        print("[6] Exit")
         selection = input("Selection: ")
         print()
 
         if selection=='1':
             agent.addListing(username)
         elif selection=='2':
-            agent.contractListing()
+            agent.contractListing(username)
+        #if selection=='3':
+        #    agent.offMarket()
         elif selection=='3':
-            agent.offMarket()
+            agent.openHouse(username)
         elif selection=='4':
-            agent.openHouse()
+            agent.viewProperties(username)
         elif selection=='5':
+            agent.viewContracts(username)
+        elif selection=='6':
             print("Quitting Program")
             break
         else:
@@ -126,19 +132,19 @@ elif log.isSeller(username):
         print("\nWelcome Seller {}".format(username))
         print("Select an operation:")
         print("[1] View agent information")
-        print("[2] Input property information")
-        print("[3] Quit")
+        print("[2] Quit")
         selection = input("Selection: ")
+        print("\n")
 
         if selection=='1':
             seller.selectAgent()
         elif selection=='2':
-            seller.inputProperty()
-        elif selection=='3':
             print("Quitting program")
             break
         else:
             print("Invalid option, try again")
+
+    pass
 
 elif log.isLandlord(username):
     while True:
@@ -146,12 +152,20 @@ elif log.isLandlord(username):
         print("Select an operation:")
         print("[1] View agent information")
         print("[2] Enter maintenance record")
+        print("[3] Exit")
         selection = input("Selection: ")
+        print("\n")
 
         if selection=='1':
             landlord.selectAgent()
         elif selection=='2':
-            landlord.maintenance()
+            landlord.maintenance(username)
+        elif selection=='3':
+            print("Quitting program")
+            break
+        else:
+            print("Invalid option, try again")
+    pass
 
 else:
     print("not done pls help")

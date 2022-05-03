@@ -8,44 +8,20 @@ def selectAgent():
     conn = sqlite3.connect('agency.db')
     c = conn.cursor()
     c.execute("SELECT * From Agent")  
-    print(c.fetchall())
+    result = c.fetchall()
+    print("                        ******** AGENTS LIST ********")
+    agents = printAgents(result)
 
 # Application then prints out the agent information so client can contact them
 
-def inputProperty():
-    conn = sqlite3.connect('agency.db')
-    c = conn.cursor()
-    location = input("Enter your property [location]: ")
-    squareFoot = input("Enter your property [square footage]: ")
-    lotSize = input("Enter your property [lot size]: ")
-    numberofBeds = input("Enter your property [number of beds]: ")
-    numberofBaths = input("Enter your property [number of baths]: ")
-    properyType = input("Enter your property [type]: ")
-    #agentID = input("Enter your property [agent ID]: ")
-    openhouseDate = input("Enter your property [open house date]: ")
-    streetAddress = input("Enter your property [street address]: ")
-    city = input("Enter your property [city]: ")
-    state = input("Enter your property [state]: ")
-    zipCode = input("Enter your property [zipCode]: ")
-    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (location, squareFoot, lotSize, numberofBeds, numberofBaths, properyType, ))
+def printAgents(result):
+    count = 1
+    for agent in result:
+        print("Agent [{}]".format(count))
+        print(agent)
+        count+=1
 
-def maintenance():
-    conn = sqlite3.connect('agency.db')
-    c = conn.cursor()
-    select = int(input("""
-    1. Add maintenance record
-    2. Show all records"""))
-    if (select==1):
-        username = input("Enter your username: ")
-        recordID = input("Enter your record ID: ")
-        date = input("Enter your date in YEAR-MONTH-DAY format: ")
-        item = input("Enter the item being maintenanced: ")
-        c.execute("INSERT OR REPLACE INTO Maintenance_Record VALUES (?, ?, ?, ?)", (username, recordID, date, item))
-        conn.commit()
-        conn.close()
-    if (select==2):
-        c.execute("SELECT * from Maintenance_Record")
-        print(c.fetchall())
-        conn.close()
+    propertyIDs = [prop[0] for prop in result]
+    return propertyIDs
 
 # Application then prints out the agent information so client can contact them
