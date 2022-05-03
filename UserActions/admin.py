@@ -16,7 +16,6 @@ sys.path.append('./../real_estate_agency/LogInSystem')
 from LogInSystem.user.user import User
 from LogInSystem import logInSignIn as log
 
-
 # Create a new Agent account for users.db and the agent table in agency.db 
 def addNewAgent():
     # Create agent account for users.db

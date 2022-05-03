@@ -100,7 +100,7 @@ elif log.isSeller(username):
     pass
 
 elif log.isLandlord(username):
-    # Landlord options
+    # selectAgent()
     pass
 
 else:

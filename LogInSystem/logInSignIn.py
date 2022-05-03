@@ -239,7 +239,6 @@ def isAdmin(username):
         return True
     conn.close()
     return False
-
 # Checks if user is an agent based on username
 # Returns true if the username exists in the admins table
 # Returns false if the username doesn't exist

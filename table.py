@@ -23,6 +23,10 @@ CREATE TABLE IF NOT EXISTS `Client` (
 	Birthday		date,
 	Email			VARCHAR(25) NOT NULL,
     Phone_number	VARCHAR(10) NOT NULL,
+<<<<<<< HEAD
+    Client_type		VARCHAR(25) NOT NULL,
+=======
+>>>>>>> origin/Wayne_Menu
 	primary key (Username)
 	);
         
@@ -57,7 +61,11 @@ CREATE TABLE IF NOT EXISTS Property (
 	Agent_id			VARCHAR(25) NOT NULL,
 	Open_house_date		DATE,
 	Owner_username		VARCHAR(25) NOT NULL,
+<<<<<<< HEAD
+    availability     	INTEGER NOT NULL,
+=======
     availability     	INTEGER,
+>>>>>>> origin/Wayne_Menu
 	PRIMARY KEY (Property_id),
 	FOREIGN KEY (Owner_username) REFERENCES `Owner`(Username) on delete cascade,
 	FOREIGN KEY (Agent_id) REFERENCES Agent(Agent_id) on delete cascade
