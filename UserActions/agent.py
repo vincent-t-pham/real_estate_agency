@@ -47,6 +47,7 @@ def addListing(username):
     propertyType = input("Enter your property [type]: ")
     agentID = username
     ownerUsername = input("Enter your property [Owner Username]: ")
+<<<<<<< HEAD
     availability = 0
     try: 
         c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, '0000-00-00', ownerUsername, availability))
@@ -54,6 +55,10 @@ def addListing(username):
         logger.exception("Failed a query.")
     else:
         logger.info("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)")
+=======
+    availability = 1
+    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, '0000-00-00', ownerUsername, availability))
+>>>>>>> Wayne_Menu
     conn.commit()
     conn.close()
     

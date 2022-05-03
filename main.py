@@ -21,7 +21,7 @@ logger.addHandler(file_handler)
 # Get username
 username = log.logInSignUp()
 
-# Check if user is an admin
+# Check if user is an admin1
 if log.isAdmin(username):
     while True:
         print("\nWelcome Admin {}".format(username))
@@ -54,7 +54,6 @@ elif log.isAgent(username):
         print("Select an operation:")
         print("[1] Add a listing property")
         print("[2] Create a contract")
-        #print("[3] Take a property off the market")
         print("[3] Create an open house")
         print("[4] View my properties")
         print("[5] View my contracts")
@@ -66,8 +65,6 @@ elif log.isAgent(username):
             agent.addListing(username)
         elif selection=='2':
             agent.contractListing(username)
-        #if selection=='3':
-        #    agent.offMarket()
         elif selection=='3':
             agent.openHouse(username)
         elif selection=='4':
@@ -161,8 +158,6 @@ elif log.isSeller(username):
         else:
             print("Invalid option, try again")
 
-    pass
-
 elif log.isLandlord(username):
     while True:
         print("\nWelcome Landlord {}".format(username))
@@ -183,7 +178,4 @@ elif log.isLandlord(username):
             break
         else:
             print("Invalid option, try again")
-    pass
 
-else:
-    print("not done pls help")
