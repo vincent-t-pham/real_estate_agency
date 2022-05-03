@@ -28,3 +28,7 @@ sqlite3.OperationalError: near "From": syntax error
 2022-05-02 22:41:43,135:LogInSystem.logInSignIn:User successfully signed in
 2022-05-02 22:41:44,970:UserActions.agent:SELECT * from Contract WHERE Agent_id=?
 2022-05-02 22:41:45,391:__main__:***User quit program***
+2022-05-02 22:49:21,357:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:50:24,035:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:51:56,508:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:52:20,921:__main__:***User quit program***

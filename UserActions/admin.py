@@ -47,7 +47,7 @@ def addNewAgent():
     conn = sql.connect('agency.db')
     c = conn.cursor()
 
-    c.execute("INSERT INTO Agent VALUES (?, ?, ?, ?, ?, ?)", (agentUsername, agentName, agentEmail, agentPhone))
+    c.execute("INSERT INTO Agent VALUES (?, ?, ?, ?)", (agentUsername, agentName, agentEmail, agentPhone))
     conn.commit()
     conn.close()
 
