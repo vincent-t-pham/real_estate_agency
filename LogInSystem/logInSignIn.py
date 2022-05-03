@@ -322,7 +322,7 @@ def promptUserType(username):
     while True:
         print("Thank you for creating an account! What are you trying to do?")
         print("[1] I'm looking to buy or rent")
-        print("[2] I'm looking to sell my poperty")
+        print("[2] I'm looking to sell my property")
         print("[3] I'm a landlord")
         selection = input("Selection: ")
         

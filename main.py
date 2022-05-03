@@ -35,7 +35,30 @@ if log.isAdmin(username):
             print("Invalid option, try again")
 
 elif log.isAgent(username):
-    # Agent options
+    while True:
+        print("\nWelcome Agent {}".format(username))
+        print("Select an operation:")
+        print("[1] Add a listing property")
+        print("[2] Create a contract")
+        print("[3] Take a property off the market")
+        print("[4] Create an open house")
+        print("[5] Exit")
+        selection = input("Selection: ")
+        print()
+
+        if selection=='1':
+            agent.addListing()
+        if selection=='2':
+            agent.contractListing()
+        if selection=='3':
+            agent.offMarket()
+        if selection=='4':
+            agent.openHouse()
+        if selection=='5':
+            print("Quitting Program")
+            break
+        else:
+            print("Invalid option, try again")
     pass
 
 elif log.isClient(username):
@@ -99,11 +122,38 @@ elif log.isClient(username):
             print("Invalid option, try again")
             
 elif log.isSeller(username):
-    # Seller options
+    while True:
+        print("\nWelcome Seller {}".format(username))
+        print("Select an operation:")
+        print("[1] View agent information")
+        print("[2] Input property information")
+        print("[3] Quit")
+        selection = input("Selection: ")
+
+        if selection=='1':
+            seller.selectAgent()
+        elif selection=='2':
+            seller.inputProperty()
+        elif selection=='3':
+            print("Quitting program")
+            break
+        else:
+            print("Invalid option, try again")
+
     pass
 
 elif log.isLandlord(username):
-    # selectAgent()
+    while True:
+        print("\nWelcome Landlord {}".format(username))
+        print("Select an operation:")
+        print("[1] View agent information")
+        print("[2] Enter maintenance record")
+        selection = input("Selection: ")
+
+        if selection=='1':
+            landlord.selectAgent()
+        elif selection=='2':
+            landlord.maintenance()
     pass
 
 else:

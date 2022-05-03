@@ -36,6 +36,7 @@ def addListing():
     availability = int(input("Is your property available? (1 for yes, 0 for no): "))
     c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, openhouseDate, ownerUsername, availability))
     conn.commit()
+    conn.close()
     
 def contractListing():
     conn = sqlite3.connect('agency.db')
