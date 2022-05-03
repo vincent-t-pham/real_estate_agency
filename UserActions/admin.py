@@ -20,13 +20,16 @@ from LogInSystem import logInSignIn as log
 def addNewAgent():
     # Create agent account for users.db
     print("Creating a new Agent account")
-    agent = User()
+    
+    agentUsername = ''
     
     timeOutCounter = 0
     while timeOutCounter < 4:
         agent = log.collectUserInfo()
         if log.SignUp(agent):
             print("New agent account made")
+            agentUsername = agent.username
+            break
         else:
             print("Sign up unsuccessful, try again\n")
             if (3 - timeOutCounter) > 1:
@@ -44,7 +47,7 @@ def addNewAgent():
     conn = sql.connect('agency.db')
     c = conn.cursor()
 
-    c.execute("INSERT INTO Agent VALUES (?, ?, ?, ?, ?, ?)", (agent.username, agentName, agentEmail, agentPhone, 0, 0))
+    c.execute("INSERT INTO Agent VALUES (?, ?, ?, ?, ?, ?)", (agentUsername, agentName, agentEmail, agentPhone, 0, 0))
     conn.commit()
     conn.close()
 
@@ -52,7 +55,7 @@ def addNewAgent():
 def deleteAgent():
     print("Which agent would you like to delete?")
     agents = printAllAgents()
-    index = input("Agent #: ")
+    index = int(input("Agent #: "))
     userName = agents[index - 1]
 
     conn = sql.connect('agency.db')
@@ -69,9 +72,11 @@ def printAllAgents():
     conn = sql.connect("agency.db")
     c = conn.cursor()
 
-    c.execute("SELECT Agent_id Name FROM Agent")
+    c.execute("SELECT Agent_id,Name FROM Agent")
     result = c.fetchall()
     conn.close()
+
+    print(result)
 
     count = 1
     for agent in result:
@@ -79,6 +84,7 @@ def printAllAgents():
         print("Username: {}".format(agent[0]))
         print("Name: {}".format(agent[1]))
         print("--------------------------")
+        count += 1
 
     usernames = [agent[0] for agent in result]
     return usernames
@@ -87,7 +93,7 @@ def printAllAgents():
 def deleteClient():
     print("Which client do you want to delete?")
     clients = printAllClients()
-    index = input("Client #: ")
+    index = int(input("Client #: "))
     userName = clients[index - 1]
 
     conn = sql.connect('agency.db')
@@ -104,7 +110,7 @@ def printAllClients():
     conn = sql.connect("agency.db")
     c = conn.cursor()
 
-    c.execute("SELECT Username Name FROM Client")
+    c.execute("SELECT Username, Name FROM Client")
     result = c.fetchall()
     conn.close()
 
@@ -114,6 +120,7 @@ def printAllClients():
         print("Username: {}".format(client[0]))
         print("Name: {}".format(client[1]))
         print("--------------------------")
+        count += 1
 
     usernames = [client[0] for client in result]
     return usernames
@@ -122,7 +129,7 @@ def printAllClients():
 def deleteOwner():
     print("Which owner do you want to delete?")
     owners = printAllOwners()
-    index = input("Owner #: ")
+    index = int(input("Owner #: "))
     userName = owners[index - 1]
 
     conn = sql.connect('agency.db')
@@ -139,7 +146,7 @@ def printAllOwners():
     conn = sql.connect("agency.db")
     c = conn.cursor()
 
-    c.execute("SELECT Username Name FROM Owner")
+    c.execute("SELECT Username, Name FROM Owner")
     result = c.fetchall()
     conn.close()
 
@@ -149,6 +156,7 @@ def printAllOwners():
         print("Username: {}".format(owner[0]))
         print("Name: {}".format(owner[1]))
         print("--------------------------")
+        count += 1
 
     usernames = [owner[0] for owner in result]
     return usernames

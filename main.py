@@ -11,7 +11,7 @@ username = log.logInSignUp()
 # Check if user is an admin
 if log.isAdmin(username):
     while True:
-        print("Welcome Admin {}".format(username))
+        print("\nWelcome Admin {}".format(username))
         print("Select an operation:")
         print("[1] Create new agent")
         print("[2] Delete an agent")
