@@ -65,9 +65,9 @@ elif log.isClient(username):
                     print("Returning")
                     break
                 else:
-                    print("Invalid option, try again asdfasdf")
+                    print("Invalid option, try again")
 
-        if selection == '2':
+        elif selection == '2':
             while True:
                 print("\nHow would you like to search for a property?")
                 print("[1] By City")

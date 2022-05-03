@@ -187,6 +187,7 @@ def printProperties(result):
     for property in result:
         print("Property [{}]".format(count))
         print(property)
+        count += 1
 
     propertyIDs = [prop[0] for prop in result]
     return propertyIDs
