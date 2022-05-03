@@ -186,6 +186,7 @@ def logInSignUp():
                 if SignUp(user):
                     print("Sign up successful")
                     print("Welcome {}!".format(user.username))
+                    promptUserType(user.username)
                     return user.username
                 else:
                     print("Sign up unsuccessful, try again\n")
@@ -250,8 +251,8 @@ def isAgent(username):
     c.execute("SELECT * FROM Agent WHERE Agent_id = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is an admin
+    if result:
         conn.close()
         return True
     conn.close()
@@ -269,8 +270,8 @@ def isClient(username):
     c.execute("SELECT * FROM Client WHERE Username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is a client
+    if result:
         conn.close()
         return True
     conn.close()
@@ -288,8 +289,8 @@ def isSeller(username):
     c.execute("SELECT * FROM seller WHERE Seller_username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is a seller
+    if result:
         conn.close()
         return True
     conn.close()
@@ -307,9 +308,79 @@ def isLandlord(username):
     c.execute("SELECT * FROM landlord WHERE Landlord_username = ?", (username,))
     result = c.fetchall()
     # print(result)
-    # If query is empty, that means username doesn't exist so it's unique
-    if not result:
+    # If query has results, that means the user is a landlord
+    if result:
         conn.close()
         return True
     conn.close()
     return False
+
+# Prompts the user to see if they're a client, seller, or landlord
+# Done only after signing up
+# Inserts the user into the respective tables
+def promptUserType(username):
+    while True:
+        print("Thank you for creating an account! What are you trying to do?")
+        print("[1] I'm looking to buy or rent")
+        print("[2] I'm looking to sell my poperty")
+        print("[3] I'm a landlord")
+        selection = input("Selection: ")
+        
+        if selection == '1':
+            getClientInfo(username)
+            break
+        elif selection == '2':
+            getSellerInfo(username)
+            break
+        elif selection == '3':
+            getLandlordInfo(username)
+            break
+        else:
+            print("That is not a valid option, try again")
+
+# Prompts the user for all the info needed for the client tables
+def getClientInfo(username):
+    name = input("Name: ")
+    birthday = input("Birthday (YYYY-MM-DD): ")
+    email = input("Email: ")
+    phone = input("Phone number ### ### ####: ").replace(" ", "")
+    
+    conn = sql.connect('agency.db')
+    c = conn.cursor()
+    
+    c.execute("INSERT INTO client VALUES (?, ?, ?, ?, ?)", (username, name, birthday, email, phone))
+    conn.commit()
+    conn.close()
+    printLineBreak()
+
+# Prompts the user for all the info needed for the owner and seller tables
+def getSellerInfo(username):
+    name = input("Name: ")
+    birthday = input("Birthday (YYYY-MM-DD): ")
+    email = input("Email: ")
+    phone = input("Phone number ### ### ####: ").replace(" ", "")
+
+    conn = sql.connect('agency.db')
+    c = conn.cursor()
+
+    c.execute("INSERT INTO Owner VALUES (?, ?, ?, ?, ?)", (username, name, birthday, email, phone))
+    c.execute("INSERT INTO Seller VALUES (?)", (username,))
+    conn.commit()
+    conn.close()
+    printLineBreak()
+
+# Prompts the user for all the info needed for the owner and landlord tables
+def getLandlordInfo(username):
+    name = input("Name: ")
+    birthday = input("Birthday (YYYY-MM-DD): ")
+    email = input("Email: ")
+    phone = input("Phone number ### ### ####: ").replace(" ", "")
+
+    conn = sql.connect('agency.db')
+    c = conn.cursor()
+
+    c.execute("INSERT INTO Owner VALUES (?, ?, ?, ?, ?)", (username, name, birthday, email, phone))
+    c.execute("INSERT INTO Landlord VALUES (?)", (username,))
+    conn.commit()
+    conn.close()
+    printLineBreak()

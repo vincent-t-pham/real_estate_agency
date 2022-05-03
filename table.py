@@ -23,7 +23,10 @@ CREATE TABLE IF NOT EXISTS `Client` (
 	Birthday		date,
 	Email			VARCHAR(25) NOT NULL,
     Phone_number	VARCHAR(10) NOT NULL,
+<<<<<<< HEAD
     Client_type		VARCHAR(25) NOT NULL,
+=======
+>>>>>>> origin/Wayne_Menu
 	primary key (Username)
 	);
         
@@ -58,7 +61,11 @@ CREATE TABLE IF NOT EXISTS Property (
 	Agent_id			VARCHAR(25) NOT NULL,
 	Open_house_date		DATE,
 	Owner_username		VARCHAR(25) NOT NULL,
+<<<<<<< HEAD
     availability     	INTEGER NOT NULL,
+=======
+    availability     	INTEGER,
+>>>>>>> origin/Wayne_Menu
 	PRIMARY KEY (Property_id),
 	FOREIGN KEY (Owner_username) REFERENCES `Owner`(Username) on delete cascade,
 	FOREIGN KEY (Agent_id) REFERENCES Agent(Agent_id) on delete cascade
@@ -189,15 +196,15 @@ c.execute("Insert into `Owner` values('walter07', 'Walter S', '1990-06-03', 'wal
 c.execute("Insert into `Owner` values('aaron98', 'Aaron P', '1976-04-23', 'aaron98@gmail.com', '5690780')")
 c.execute("Insert into `Owner` values('hina87', 'Hina S', '1998-06-14', 'hinas_87@gmail.com', '5654870')")
 # add to client
-c.execute("Insert into `Client` values('anikha69', 'Anikha S', '1997-06-03', 'anikha_s@gmail.com', '5690230', 'renter')")
-c.execute("Insert into `Client` values('christineio', 'Christine Polly', '1987-06-19', 'jimmyw@gmail.com', '5687640', 'buyer')")
-c.execute("Insert into `Client` values('stephenstrange', 'Stephen S', '1976-04-09', 'stephen_s@gmail.com', '56919087','buyer')")
-c.execute("Insert into `Client` values('tony_s', 'Tony S', '1988-12-08', 'tonystark@gmail.com', '56182938', 'renter')")
+c.execute("Insert into `Client` values('anikha69', 'Anikha S', '1997-06-03', 'anikha_s@gmail.com', '5690230')")
+c.execute("Insert into `Client` values('christineio', 'Christine Polly', '1987-06-19', 'jimmyw@gmail.com', '5687640')")
+c.execute("Insert into `Client` values('stephenstrange', 'Stephen S', '1976-04-09', 'stephen_s@gmail.com', '56919087')")
+c.execute("Insert into `Client` values('tony_s', 'Tony S', '1988-12-08', 'tonystark@gmail.com', '56182938')")
 # add to Property
 c.execute("Insert into Property values('2266578381', '2021-08-06', 1300, 4500, 3,4, '123 Peachtree', 'San Jose', 'CA', 95192, 'rental', '0986289', '2021-09-08', 'jimmy23', TRUE)")
 c.execute("Insert into Property values('2283729010', '2021-09-05', 1100, 3400, 2,2, '123 Avalon', 'Santa Clara', 'CA', 95145, 'sale', '0989589', '2021-09-10', 'walter07', TRUE)")
 c.execute("Insert into Property values('2289972029', '2021-09-16', 1800, 5000, 4,4, '1100 Morrison', 'San Jose', 'CA', 95126, 'sale', '0975482', '2021-09-18', 'aaron98', TRUE)")
-c.execute("Insert into Property values('2218271949', '2021-09-21', 800, 3000, 2,1, '383 Stockton', 'Santa Clara', 'CA', 95148, 'rent', '0985820', '2021-09-24', 'hina87', TRUE)")
+c.execute("Insert into Property values('2218271949', '2021-09-21', 800, 3000, 2,1, '383 Stockton', 'Santa Clara', 'CA', 95148, 'rental', '0985820', '2021-09-24', 'hina87', TRUE)")
 # add to agent
 c.execute("Insert into Agent values('0986289', 'Jesse Pinkman', 'jesse_pinkman@gmail.com', '56452613', 4, 4)")
 c.execute("Insert into Agent values('0989589', 'Anakin Skywalker', 'anakinsky@gmail.com', '56371613', 2, 2)")
@@ -239,7 +246,6 @@ c.execute("Insert into Agent_works_with_client values('tony_s', '0985820')")
 # add to Agent_works_with_owner
 c.execute("Insert into Agent_works_with_owner values('walter07', '0975482')")
 c.execute("Insert into Agent_works_with_owner values('aaron98', '0985820')")
-
 
 conn.commit()
 conn.close()
