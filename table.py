@@ -34,8 +34,6 @@ CREATE TABLE IF NOT EXISTS Agent(
 	Name			VARCHAR(25) NOT NULL,
     Email   		VARCHAR(25) NOT NULL,
     Phone_number	VARCHAR(10) NOT NULL,
-	Number_of_clients	integer not null,
-	Number_of_properties	integer not null,
 	primary key (Agent_id)
 	);
         
@@ -198,10 +196,10 @@ c.execute("Insert into Property values('2283729010', '2021-09-05', 1100, 3400, 2
 c.execute("Insert into Property values('2289972029', '2021-09-16', 1800, 5000, 4,4, '1100 Morrison', 'San Jose', 'CA', 95126, 'sale', '0975482', '2021-09-18', 'aaron98', TRUE)")
 c.execute("Insert into Property values('2218271949', '2021-09-21', 800, 3000, 2,1, '383 Stockton', 'Santa Clara', 'CA', 95148, 'rental', '0985820', '2021-09-24', 'hina87', TRUE)")
 # add to agent
-c.execute("Insert into Agent values('0986289', 'Jesse Pinkman', 'jesse_pinkman@gmail.com', '56452613', 4, 4)")
-c.execute("Insert into Agent values('0989589', 'Anakin Skywalker', 'anakinsky@gmail.com', '56371613', 2, 2)")
-c.execute("Insert into Agent values('0975482', 'Paul Rudd', 'paul_rudd@gmail.com', '56472013', 2, 3)")
-c.execute("Insert into Agent values('0985820', 'Anthony Edward', 'edward_tony@gmail.com', '56452719', 3, 3)")
+c.execute("Insert into Agent values('0986289', 'Jesse Pinkman', 'jesse_pinkman@gmail.com', '56452613')")
+c.execute("Insert into Agent values('0989589', 'Anakin Skywalker', 'anakinsky@gmail.com', '56371613')")
+c.execute("Insert into Agent values('0975482', 'Paul Rudd', 'paul_rudd@gmail.com', '56472013')")
+c.execute("Insert into Agent values('0985820', 'Anthony Edward', 'edward_tony@gmail.com', '56452719')")
 # add to contract
 c.execute("Insert into Contract values('1572672817', 'rental', 1500, NULL, '2021-09-15', 'anikha69', 'jimmy23', '2266578381', '0986289')")
 c.execute("Insert into Contract values('1289172901', 'sale', 150000, '2021-09-10', NULL, 'christineio', 'walter07', '2283729010', '0989589')")

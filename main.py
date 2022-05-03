@@ -8,7 +8,7 @@ from UserActions import seller
 # Get username
 username = log.logInSignUp()
 
-# Check if user is an admin
+# Check if user is an admin1
 if log.isAdmin(username):
     while True:
         print("\nWelcome Admin {}".format(username))

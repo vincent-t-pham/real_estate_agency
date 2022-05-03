@@ -33,7 +33,7 @@ def addListing(username):
     propertyType = input("Enter your property [type]: ")
     agentID = username
     ownerUsername = input("Enter your property [Owner Username]: ")
-    availability = 0
+    availability = 1
     c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, '0000-00-00', ownerUsername, availability))
     conn.commit()
     conn.close()
