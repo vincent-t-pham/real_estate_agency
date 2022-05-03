@@ -180,6 +180,7 @@ CREATE TABLE IF NOT EXISTS Agent_works_with_owner(
     FOREIGN KEY (Owner_username) REFERENCES Owner(username) on delete cascade
 );""")
 
+<<<<<<< HEAD
 # add to Owner
 c.execute("Insert into Owner values('jimmy23', 'Jimmy W', '1980-04-03', 'jimmyw@gmail.com', '5690230')")
 c.execute("Insert into Owner values('walter07', 'Walter S', '1990-06-03', 'walter_s@gmail.com', '5698210')")
@@ -239,3 +240,10 @@ c.execute("Insert into Agent_works_with_owner values('aaron98', '0985820')")
 
 conn.commit()
 conn.close()
+=======
+c.execute("INSERT OR REPLACE INTO Owner VALUES ('Vincent.t.pham', 'Vincent', '2001-01-02', 'vincent.t.pham@sjsu.edu')") 
+c.execute("INSERT OR REPLACE INTO Seller VALUES ('test')")
+
+conn.commit()
+
+>>>>>>> main
