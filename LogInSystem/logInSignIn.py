@@ -7,6 +7,19 @@
 import sqlite3 as sql
 from .user.user import User
 import hashlib
+import logging
+
+# Logging File 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+file_handler = logging.FileHandler('database.log')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
 
 # Debugging function to print out all users and encrypted passwords
 def utilGetAllUsers():
@@ -184,11 +197,13 @@ def logInSignUp():
             while timeOutCounter < 4:
                 user = collectUserInfo()
                 if SignUp(user):
+                    logger.info("User created an account successfully")          # LOG
                     print("Sign up successful")
                     print("Welcome {}!".format(user.username))
                     promptUserType(user.username)
                     return user.username
                 else:
+                    logger.info("User failed an account creation")                # LOG
                     print("Sign up unsuccessful, try again\n")
                     if (3 - timeOutCounter) > 1:
                         print("%d attempts remaining" % (3 - timeOutCounter))
@@ -202,11 +217,13 @@ def logInSignUp():
             while timeOutCounter < 4:
                 user = collectUserInfo()
                 if logIn(user):
+                    logger.info("User successfully signed in")              # LOG
                     print("Log in successful")
                     print("Welcome back, {}!".format(user.username))
 
                     return user.username
                 else:
+                    logger.info("User failed a login")                      # LOG
                     print("Try Again\n")
                     if (3 - timeOutCounter) > 1:
                         print("%d attempts remaining" % (3 - timeOutCounter))
