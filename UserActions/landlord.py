@@ -1,11 +1,31 @@
 import sqlite3
+import logging
+
+# Logging File 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+file_handler = logging.FileHandler('database.log')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+
+
 # A Landlord can select an agent out of a list of available agents
     # Agent [1]: name goes here
 def selectAgent():
     #Supposed to connect Owner to Landlord to Agent in SQL, needs an entry into Agent
     conn = sqlite3.connect('agency.db')
     c = conn.cursor()
-    c.execute("SELECT * From Agent")  
+    try:
+        c.execute("SELECT * From Agent")  
+    except: 
+        logger.exception("Failed a query.")
+    else:
+        logger.info("SELECT * From Agent")
     result = c.fetchall()
     print("                        ******** AGENTS LIST ********")
     agents = printAgents(result)
@@ -32,11 +52,22 @@ def maintenance(username):
 
         date = input("Enter your date in YEAR-MONTH-DAY format: ")
         item = input("Enter the item being maintenanced: ")
-        c.execute("INSERT OR REPLACE INTO Maintenance_Record VALUES (?, ?, ?, ?)", (username, recordID, date, item))
+        try:
+            c.execute("INSERT OR REPLACE INTO Maintenance_Record VALUES (?, ?, ?, ?)", (username, recordID, date, item))
+        except:
+            logger.exception("Failed a query.")
+        else:
+            logger.info("INSERT OR REPLACE INTO Maintenance_Record VALUES (?, ?, ?, ?)")
         conn.commit()
         conn.close()
     if (select==2):
-        c.execute("SELECT * from Maintenance_Record WHERE Username=? ", (username,))
+        try:
+            c.execute("SELECT * from Maintenance_Record WHERE Username=? ", (username,))
+        except:
+            logger.exception("Failed a query.")
+        else:
+            logger.info("SELECT * from Maintenance_Record WHERE Username=?")
+
         result = c.fetchall()
         print("                        ******** MAINTENANCE LIST ********")
         printRecords(result)

@@ -1,5 +1,19 @@
 import sqlite3
 from datetime import date
+import logging
+
+# Logging File 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+file_handler = logging.FileHandler('database.log')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+
 # An Agent can add a new listing to manage
 # This action will assume that the current agent is managing this property
 # also assumes that the new propery will be available
@@ -34,7 +48,12 @@ def addListing(username):
     agentID = username
     ownerUsername = input("Enter your property [Owner Username]: ")
     availability = 0
-    c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, '0000-00-00', ownerUsername, availability))
+    try: 
+        c.execute("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)", (propertyID, listedDate, squareFoot, lotSize, numberofBaths, numberofBeds, streetAddress, city, state, zipCode, propertyType, agentID, '0000-00-00', ownerUsername, availability))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)")
     conn.commit()
     conn.close()
     
@@ -44,7 +63,12 @@ def contractListing(username):
 
     #***User inputs for the contract***
     #Queries for existing Property data to be used 
-    c.execute("SELECT * FROM Property where Agent_id=? ", (username, ))
+    try:
+        c.execute("SELECT * FROM Property where Agent_id=? ", (username, ))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("SELECT * FROM Property where Agent_id=? ")
     result = c.fetchall()
     propertyIDs = printProperties(result)
     ownerUsernames = printUsername(result)
@@ -52,7 +76,12 @@ def contractListing(username):
     index = int(input("Enter the property you're interested in using: "))
 
     #Queries for Contract_ID to index as input for contractID
-    c.execute("SELECT Max(Contract_ID) from Contract")
+    try:
+        c.execute("SELECT Max(Contract_ID) from Contract")
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("SELECT Max(Contract_ID) from Contract")
     result = c.fetchall()
     contractIDs = printContractID(result)
     contractID = int(contractIDs[0]) + 1
@@ -66,8 +95,19 @@ def contractListing(username):
     propType = propTypes[index-1]
     propertyID = propertyIDs[index-1]
     ownerUsername = ownerUsernames[index-1]
-    c.execute("UPDATE Property SET availability=0 WHERE property_id=?", (propertyID, ))
-    c.execute("INSERT OR REPLACE INTO Contract VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (contractID, propType, price, purchaseDate, leaseStartDate, clientUsername, ownerUsername, propertyID, username))
+    try:
+        c.execute("UPDATE Property SET availability=0 WHERE property_id=?", (propertyID, ))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("UPDATE Property SET availability=0 WHERE property_id=?")
+    
+    try:
+        c.execute("INSERT OR REPLACE INTO Contract VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (contractID, propType, price, purchaseDate, leaseStartDate, clientUsername, ownerUsername, propertyID, username))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("INSERT OR REPLACE INTO Contract VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
     conn.commit()
     conn.close()
 
@@ -97,7 +137,12 @@ def openHouse(username):
     c = conn.cursor()
 
     agentID = username
-    c.execute("SELECT * FROM Property where Agent_id=? ", (agentID, ))
+    try:
+        c.execute("SELECT * FROM Property where Agent_id=? ", (agentID, ))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("SELECT * FROM Property where Agent_id=? ")
     result = c.fetchall()
     propertyIDs = printProperties(result)
     index = int(input("Enter the property that you're interested in: "))
@@ -111,7 +156,12 @@ def viewProperties(username):
     conn = sqlite3.connect('agency.db')
     c = conn.cursor()
 
-    c.execute("SELECT * from Property WHERE Agent_id=?", (username, ))
+    try:
+        c.execute("SELECT * from Property WHERE Agent_id=?", (username, ))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("SELECT * from Property WHERE Agent_id=?")
     result = c.fetchall()
     print("                        ******** PROPERTIES LIST ********")
     properties = printProperties(result)
@@ -121,7 +171,12 @@ def viewContracts(username):
     conn = sqlite3.connect('agency.db')
     c = conn.cursor()
 
-    c.execute("SELECT * from Contract WHERE Agent_id=?", (username, ))
+    try:
+        c.execute("SELECT * from Contract WHERE Agent_id=?", (username, ))
+    except:
+        logger.exception("Failed a query.")
+    else:
+        logger.info("SELECT * from Contract WHERE Agent_id=?")
     result = c.fetchall()
     print("                        ******** CONTRACTS LIST ********")
     contracts = printContracts(result)

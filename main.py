@@ -4,6 +4,19 @@ from UserActions import client
 from UserActions import agent
 from UserActions import landlord
 from UserActions import seller
+import logging
+
+# Logging File 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+file_handler = logging.FileHandler('database.log')
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
 
 # Get username
 username = log.logInSignUp()
@@ -30,6 +43,7 @@ if log.isAdmin(username):
             admin.deleteClient()
         elif selection == '5':
             print("Quiting program")
+            logger.info("***User quit program***")
             break
         else:
             print("Invalid option, try again")
@@ -62,6 +76,7 @@ elif log.isAgent(username):
             agent.viewContracts(username)
         elif selection=='6':
             print("Quitting Program")
+            logger.info("***User quit program***")
             break
         else:
             print("Invalid option, try again")
@@ -123,6 +138,7 @@ elif log.isClient(username):
                     
         elif selection == '3':
             print("Quiting program")
+            logger.info("***User quit program***")
             break
         else:
             print("Invalid option, try again")
@@ -140,6 +156,7 @@ elif log.isSeller(username):
             seller.selectAgent()
         elif selection=='2':
             print("Quitting program")
+            logger.info("***User quit program***")
             break
         else:
             print("Invalid option, try again")
@@ -162,6 +179,7 @@ elif log.isLandlord(username):
             landlord.maintenance(username)
         elif selection=='3':
             print("Quitting program")
+            logger.info("***User quit program***")
             break
         else:
             print("Invalid option, try again")

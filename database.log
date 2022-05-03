@@ -1,0 +1,30 @@
+2022-05-02 22:15:34,351:UserActions.seller:Failed query.
+Traceback (most recent call last):
+  File "c:\Users\Vincent Pham\Documents\GitHub\real_estate_agency\UserActions\seller.py", line 23, in selectAgent
+    c.execute("SELECT  From Agent")
+sqlite3.OperationalError: near "From": syntax error
+2022-05-02 22:16:21,748:UserActions.seller:SELECT * From Agent
+2022-05-02 22:20:26,384:UserActions.seller:Failed query.
+Traceback (most recent call last):
+  File "c:\Users\Vincent Pham\Documents\GitHub\real_estate_agency\UserActions\seller.py", line 26, in selectAgent
+    c.execute("SELECT  From Agent")
+sqlite3.OperationalError: near "From": syntax error
+2022-05-02 22:22:32,136:LogInSystem.logInSignIn:User failed a login
+2022-05-02 22:22:36,520:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:29:15,495:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:29:16,471:UserActions.landlord:SELECT * From Agent
+2022-05-02 22:29:18,994:UserActions.landlord:SELECT * from Maintenance_Record WHERE Username=? '', (username,)
+2022-05-02 22:33:58,290:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:34:16,759:UserActions.agent:INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)
+2022-05-02 22:34:18,223:UserActions.agent:SELECT * FROM Property where Agent_id=? 
+2022-05-02 22:34:19,737:UserActions.agent:SELECT Max(Contract_ID) from Contract
+2022-05-02 22:34:30,670:UserActions.agent:UPDATE Property SET availability=0 WHERE property_id=?
+2022-05-02 22:34:30,672:UserActions.agent:INSERT OR REPLACE INTO Contract VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-05-02 22:34:32,537:UserActions.agent:SELECT * FROM Property where Agent_id=? 
+2022-05-02 22:39:13,837:LogInSystem.logInSignIn:User failed a login
+2022-05-02 22:39:18,403:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:41:37,126:LogInSystem.logInSignIn:User failed a login
+2022-05-02 22:41:41,198:LogInSystem.logInSignIn:User failed a login
+2022-05-02 22:41:43,135:LogInSystem.logInSignIn:User successfully signed in
+2022-05-02 22:41:44,970:UserActions.agent:SELECT * from Contract WHERE Agent_id=?
+2022-05-02 22:41:45,391:__main__:***User quit program***
