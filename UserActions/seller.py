@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2022 TEAM 11
+
 # A Seller can select an agent out of a list of available agents
     # Agent [1]: name goes here
 import sqlite3

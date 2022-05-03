@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+# SJSU CMPE 138 Spring 2022 TEAM 11
+
 from LogInSystem import logInSignIn as log
 from UserActions import admin
 from UserActions import client
@@ -179,24 +180,4 @@ elif log.isLandlord(username):
             break
         else:
             print("Invalid option, try again")
-=======
-import sqlite3
-
-from table import c         #import cursor
-from table import conn      #import connection
-
-state = int(input("""
-1. Account
-2. Do nothing
-"""))
-
-if state==1:
-    c.execute("SELECT * from Owner")
-    result = c.fetchall()
-    print(result)
-elif state==2:
-    print("You good for nothing.")
-
-conn.close()
->>>>>>> main
 

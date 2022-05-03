@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2022 TEAM 11
+
 import sqlite3
 import logging
 
