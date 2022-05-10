@@ -32,3 +32,29 @@ sqlite3.OperationalError: near "From": syntax error
 2022-05-02 22:50:24,035:LogInSystem.logInSignIn:User successfully signed in
 2022-05-02 22:51:56,508:LogInSystem.logInSignIn:User successfully signed in
 2022-05-02 22:52:20,921:__main__:***User quit program***
+2022-05-09 18:35:39,729:LogInSystem.logInSignIn:User successfully signed in
+2022-05-09 18:37:11,354:__main__:***User quit program***
+2022-05-09 18:37:31,901:LogInSystem.logInSignIn:User successfully signed in
+2022-05-09 18:37:50,581:__main__:***User quit program***
+2022-05-09 18:38:03,594:LogInSystem.logInSignIn:User failed a login
+2022-05-09 18:38:07,401:LogInSystem.logInSignIn:User successfully signed in
+2022-05-09 18:40:01,071:UserActions.agent:INSERT OR REPLACE INTO Property VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?, ?, ?)
+2022-05-09 18:40:07,035:UserActions.agent:SELECT * from Property WHERE Agent_id=?
+2022-05-09 18:40:26,480:UserActions.agent:SELECT * FROM Property where Agent_id=? 
+2022-05-09 18:40:54,481:LogInSystem.logInSignIn:User successfully signed in
+2022-05-09 18:41:16,248:UserActions.agent:SELECT * FROM Property where Agent_id=? 
+2022-05-09 18:41:26,926:UserActions.agent:SELECT * from Property WHERE Agent_id=?
+2022-05-09 18:41:43,953:UserActions.agent:SELECT * FROM Property where Agent_id=? 
+2022-05-09 18:41:46,988:UserActions.agent:SELECT Max(Contract_ID) from Contract
+2022-05-09 18:42:30,845:UserActions.agent:UPDATE Property SET availability=0 WHERE property_id=?
+2022-05-09 18:42:30,850:UserActions.agent:INSERT OR REPLACE INTO Contract VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-05-09 18:42:37,102:UserActions.agent:SELECT * from Contract WHERE Agent_id=?
+2022-05-09 18:42:49,164:__main__:***User quit program***
+2022-05-09 18:43:13,238:LogInSystem.logInSignIn:User created an account successfully
+2022-05-09 18:45:50,059:__main__:***User quit program***
+2022-05-09 18:46:08,228:LogInSystem.logInSignIn:User created an account successfully
+2022-05-09 18:47:13,294:UserActions.landlord:SELECT * From Agent
+2022-05-09 18:48:20,140:UserActions.landlord:INSERT OR REPLACE INTO Maintenance_Record VALUES (?, ?, ?, ?)
+2022-05-09 18:48:44,533:UserActions.landlord:SELECT * from Maintenance_Record WHERE Username=?
+2022-05-09 18:49:14,947:UserActions.landlord:INSERT OR REPLACE INTO Maintenance_Record VALUES (?, ?, ?, ?)
+2022-05-09 18:49:18,118:UserActions.landlord:SELECT * from Maintenance_Record WHERE Username=?
